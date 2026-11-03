@@ -13,6 +13,6 @@ public class NotificadorEmail {
     }
 
     private boolean esEstadoValido(Estado estado){
-        return(estadoNuevo = Confirmada || estadoNuevo = Finalizada || estadoNuevo = EnCurso);
+        return(estado = Confirmada || estado = Finalizada || estado = EnCurso);
     }
 }
