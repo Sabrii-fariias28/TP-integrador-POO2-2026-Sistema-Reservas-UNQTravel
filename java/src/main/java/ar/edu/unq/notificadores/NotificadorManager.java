@@ -1,4 +1,6 @@
-package src.main.java.ar.edu.unq;
+package ar.edu.unq.notificadores;
+
+import ar.edu.unq.Estado;//BORRAR ES PARA TEST AL NO TENER LOS STATES
 
 import java.util.ArrayList;
 
@@ -19,7 +21,11 @@ public class NotificadorManager {
         notificadores.add(notificador);
     }
 
-    private void quitarNotificador(Notificador notificador){
+    public void quitarNotificador(Notificador notificador){
         notificadores.remove(notificador);
+    }
+
+    public ArrayList<Notificador> getNotificadores() {
+        return notificadores;
     }
 }
