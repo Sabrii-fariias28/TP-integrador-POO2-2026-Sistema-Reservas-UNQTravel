@@ -1,8 +1,6 @@
 package ar.edu.unq.busquedaDeCatalogoTest;
 
-import ar.edu.unq.BusquedaDeCatalogo.Buscador;
-import ar.edu.unq.BusquedaDeCatalogo.Criterio;
-import ar.edu.unq.BusquedaDeCatalogo.CriterioPorPrecioMax;
+import ar.edu.unq.BusquedaDeCatalogo.*;
 import ar.edu.unq.Catalogo;
 import ar.edu.unq.ItemCatalogo;
 import org.junit.jupiter.api.BeforeEach;
