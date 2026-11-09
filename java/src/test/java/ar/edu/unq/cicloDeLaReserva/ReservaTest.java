@@ -2,6 +2,7 @@ package ar.edu.unq.cicloDeLaReserva;
 
 import ar.edu.unq.ItemCatalogo;
 
+import ar.edu.unq.metodoDePago.MetodoDePago;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,13 +15,16 @@ class ReservaTest {
 
     private Reserva reserva;
     private ItemCatalogo servicio;
+    private MetodoDePago metodoPagoMock;
 
     @BeforeEach
     void setUp() {
         LocalDate fechaInicio = LocalDate.of(2026, 12, 10);
         LocalDate fechaFin = LocalDate.of(2026, 12, 15);
 
-        reserva = new Reserva(2, fechaInicio, fechaFin);
+        metodoPagoMock = mock(MetodoDePago.class);
+
+        reserva = new Reserva(2, fechaInicio, fechaFin, metodoPagoMock);
 
         servicio = mock(ItemCatalogo.class);
 

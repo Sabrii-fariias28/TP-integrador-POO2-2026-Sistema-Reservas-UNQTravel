@@ -13,16 +13,17 @@ public class Reserva extends EstadoReserva{
     private int cantPersonas; //revisar...
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
-    //private NotificadorManager notificador; Cuando Dami haga push a su rama lo descomento...
     private MetodoDePago metodoDePago;
+    //private NotificadorManager notificador; Cuando Dami haga push a su rama lo descomento...
 
-    //Acordarme de poner en el contructor el met de pago y el notificador cuando lo hagamos
-    public Reserva(int cantPersonas,  LocalDate fechaInicio, LocalDate fechaFin) {
+    //Acordarme de poner en el contructor el notificador cuando lo hagamos
+    public Reserva(int cantPersonas,  LocalDate fechaInicio, LocalDate fechaFin, MetodoDePago metodoDePago) {
         this.servicios = new ArrayList<>();
         this.estado = new Pendiente();
         this.cantPersonas = cantPersonas;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.metodoDePago = metodoDePago;
     }
 
     public void agregarItem(ItemCatalogo item){
@@ -60,7 +61,9 @@ public class Reserva extends EstadoReserva{
     }
 
     //estos lo tengo que agregar al UML
-    public void reembolsarTotalCostos(){};
+    public void reembolsarTotalCostos(){
+        metodoDePago.realizarReembolso(calcularPrecioTotal());
+    };
     public void reembolsarCostos(){};
     public void realizarPago(){
        metodoDePago.realizarPago(calcularPrecioTotal());
@@ -93,8 +96,3 @@ public class Reserva extends EstadoReserva{
     }
 
 }
-
-
-//Por aca pensé algo, si una familia quiere reservar, entonces ponele que entonces tiene que resevar para todos los integrandes
-//Entonces, no deberia descrementar los cupos segun la cantidad de personas¿, por ejemplo 4, entonces el precio se multiplica
-//Por justamente 4, lo mismo para cuando quieren rebolsar, se tienen que liberar 4 cupos de esos servicios que eligieron...

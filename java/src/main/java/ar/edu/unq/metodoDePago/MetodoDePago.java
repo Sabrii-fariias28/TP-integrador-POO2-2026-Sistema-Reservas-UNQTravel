@@ -14,6 +14,6 @@ public abstract class MetodoDePago {
     public abstract void ejecutarTransaccion(double cantidad);
     public abstract void notificarResultado();
 
-    public abstract void reembolsar(double cantidad);
+    public abstract void realizarReembolso(double cantidad);
 
 }
