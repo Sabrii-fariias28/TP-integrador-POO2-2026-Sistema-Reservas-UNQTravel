@@ -1,13 +1,18 @@
 package ar.edu.unq.serviciosypaquetes;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 public abstract class ItemCatalogo {
     String id;
     String nombre;
-    int cupos;
+    List<Disponibilidad> cupos;
     String descripcion;
     String proveedor;
 
-    public ItemCatalogo (String id, String nombre, int cupos, String descripcion, String proveedor){
+    public ItemCatalogo (String id, String nombre, List<Disponibilidad> cupos, String descripcion, String proveedor){
         this.id = id;
         this.nombre = nombre;
         this.cupos = cupos;
@@ -23,26 +28,76 @@ public abstract class ItemCatalogo {
         return this.nombre;
     }
 
-    public int getCupos(){
-        return this.cupos;
-    }
-
     public String getDescripcion(){
         return this.descripcion;
     }
 
-    public boolean estaDisponible(){
-        return this.cupos > 0;
-    }
+    abstract public double getPrecioBase();
 
     abstract public double precioFinal(double descuento);
 
-
-    public void decrementarCupo(int cantidad){
-        this.cupos =- cantidad;
+    public List<Disponibilidad> getCupos(){
+        return this.cupos;
     }
 
-    public void aumentarCupo(int cantidad){
-        this.cupos =+ cantidad;
+    public boolean hayCupos(int cant){
+        return this.cupos.stream().anyMatch(cupo -> cupo.hayLugar(cant));
+    }
+    public boolean estaDisponible(LocalDate fecha, int personas){
+        return buscarPorFecha(fecha)
+                .map(disp -> disp.hayLugar(personas))
+                .orElse(false); // Si la fecha no existe en la lista, no está disponible
+    }
+
+    public Optional<Disponibilidad> buscarPorFecha(LocalDate fecha) {
+        return this.cupos.stream()
+                .filter(d -> d.getFecha().equals(fecha))
+                .findFirst();
+    }
+
+    public void reservarRango(LocalDate fechaInicio, LocalDate fechaFin, int personas) {
+        List<Disponibilidad> diasAApartar = new ArrayList<>();
+
+        // Recorrer el rango de fechas día por día
+        for (LocalDate fecha = fechaInicio; !fecha.isAfter(fechaFin); fecha = fecha.plusDays(1)) {
+            Disponibilidad disp = buscarPorFecha(fecha)
+                    .orElseThrow(() -> new IllegalArgumentException("No se puede reservar en la fecha: " + fecha));
+            /* Verificar si hay cupo para ese día específico*/
+            if (!disp.hayLugar(personas)) {
+                throw new IllegalArgumentException("Cupo insuficiente para el día: " + fecha);
+            }
+
+            diasAApartar.add(disp);
+        }
+
+        //  Si todos los días son válidos, confirmamos la reserva para el grupo de dias
+        for (Disponibilidad disp : diasAApartar) {
+            disp.agendarReserva(personas);
+        }
+    }
+
+    public void cancelar(LocalDate fechaInicio, LocalDate fechaFin, int personas){
+        List<Disponibilidad> diasACancelar = new ArrayList<>();
+
+        // Recorrer el rango de fechas día por día
+        for (LocalDate fecha = fechaInicio; !fecha.isAfter(fechaFin); fecha = fecha.plusDays(1)) {
+            Disponibilidad disp = buscarPorFecha(fecha)
+                    .orElseThrow(() -> new IllegalArgumentException("No se puede cancelar si no hay reserva en la fecha: " + fecha));
+            /* Verificar si hay cupo para ese día específico*/
+            if (!disp.puedeCancelar(personas)) {
+                throw new IllegalArgumentException("Cupo insuficiente para el día: " + fecha);
+            }
+
+            diasACancelar.add(disp);
+        }
+
+        //  Si todos los días son válidos, confirmamos la reserva para el grupo de dias
+        for (Disponibilidad disp : diasACancelar) {
+            disp.cancelarReservas(personas);
+        }
+    }
+
+    public void agregarFecha(LocalDate fecha, int capacidad) {
+        cupos.add(new Disponibilidad(fecha, capacidad));
     }
 }

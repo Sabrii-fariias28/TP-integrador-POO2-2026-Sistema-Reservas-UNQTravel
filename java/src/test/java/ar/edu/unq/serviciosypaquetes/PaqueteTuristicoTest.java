@@ -20,7 +20,7 @@ public class PaqueteTuristicoTest {
         itemMock2 = mock(ServicioIndividual.class);
         List<ItemCatalogo> itemsPredefinidos = List.of(itemMock1, itemMock2);
 
-        paquete = new PaqueteTuristico("P1", "Paquete Patagonia", 5, "", "Travel Rock", itemsPredefinidos);
+        paquete = new PaqueteTuristico("P1", "Paquete Patagonia", 5, "", "Travel Rock", itemsPredefinidos, 0.0);
 
 
     }
@@ -29,17 +29,14 @@ public class PaqueteTuristicoTest {
     void testPrecioFinal() {
 
         // Aplicamos un descuento de 10.0 al paquete
-        when(itemMock1.precioFinal(10.0)).thenReturn(5000.0);
-        when(itemMock2.precioFinal(10.0)).thenReturn(3000.0);
+        when(itemMock1.getPrecioBase()).thenReturn(5000.0);
+        when(itemMock2.getPrecioBase()).thenReturn(3000.0);
 
 
-        double precioTotal = paquete.precioFinal(10.0);
+        double precioTotal = paquete.precioFinal(0.0);
 
         // Verificamos que el paquete haya sumado los valores correctamente (5000 + 3000 = 8000)
-        assertEquals(8000.0, precioTotal, "El precio final del paquete debe ser la suma de los precios finales de sus ítems");
+        assertEquals(8000.0, precioTotal);
 
-        // Verificamos que el paquete efectivamente llamó al metodo
-        verify(itemMock1, times(1)).precioFinal(10.0);
-        verify(itemMock2, times(1)).precioFinal(10.0);
     }
 }

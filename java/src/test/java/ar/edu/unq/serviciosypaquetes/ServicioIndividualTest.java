@@ -10,7 +10,7 @@ class ServicioIndividualTest {
 
     @BeforeEach
     void setUp() {
-        servicio = new ServicioIndividual("1", "Vuelo a Bariloche", 10, "Vuelo Nacional", "Aerolineas Argentinas", "Vuelo");
+        servicio = new ServicioIndividual("1", "Vuelo a Bariloche", 10, "Vuelo Nacional", "Aerolineas Argentinas", "Vuelo", 4000.0);
     }
 
     @Test
