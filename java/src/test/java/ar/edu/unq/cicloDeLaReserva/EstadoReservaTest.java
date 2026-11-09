@@ -7,7 +7,8 @@ import ar.edu.unq.ItemCatalogo;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class EstadoReservaTest {
+class EstadoReservaTest {
+
     private EstadoReserva estadoBase;
     private Reserva reservaMock;
     private ItemCatalogo itemMock;
@@ -20,17 +21,20 @@ public class EstadoReservaTest {
     }
 
     @Test
-    void porDefectoAgregarItemLanzaOperacionInvalida() {
-        assertThrows(OperacionInvalida.class, () -> estadoBase.agregarItem(reservaMock, itemMock));
+    void testAgregarItem_EnEstadoBase_LanzaExcepcion() {
+        Exception excepcion = assertThrows(OperacionInvalida.class, () -> estadoBase.agregarItem(reservaMock, itemMock));
+        assertEquals("No se pueden agregar servicios", excepcion.getMessage());
     }
 
     @Test
-    void porDefectoConfirmarReservaLanzaOperacionInvalida() {
-        assertThrows(OperacionInvalida.class, () -> estadoBase.confirmarReserva(reservaMock));
+    void testConfirmarReserva_EnEstadoBase_LanzaExcepcion() {
+        Exception excepcion = assertThrows(OperacionInvalida.class, () -> estadoBase.confirmarReserva(reservaMock));
+        assertEquals("No se puede confirmar la reserva", excepcion.getMessage());
     }
 
     @Test
-    void porDefectoRealizarCheckInLanzaOperacionInvalida() {
-        assertThrows(OperacionInvalida.class, () -> estadoBase.realizarCheckIn(reservaMock));
+    void testRealizarCheckIn_EnEstadoBase_LanzaExcepcion() {
+        Exception excepcion = assertThrows(OperacionInvalida.class, () -> estadoBase.realizarCheckIn(reservaMock));
+        assertEquals("No se puede realizar el check-in", excepcion.getMessage());
     }
 }

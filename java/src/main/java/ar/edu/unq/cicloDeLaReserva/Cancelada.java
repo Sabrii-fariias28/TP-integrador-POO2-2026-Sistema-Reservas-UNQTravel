@@ -10,14 +10,17 @@ public class Cancelada extends EstadoReserva{
 
     @Override
     public void confirmarViaje(Reserva reserva) {
-        throw new OperacionInvalida("No se puede confirmar el viaje: la reserva ya fue cancelada.");
+        throw new OperacionInvalida("No se puede confirmar el viaje: la reserva ya fue cancelada");
     }
 
+    @Override
     public void agregarItem(Reserva reserva, ItemCatalogo item) {
-        throw new OperacionInvalida("No se pueden agregar servicios la reserva fue cancelada.");
+        throw new OperacionInvalida("No se pueden agregar servicios: la reserva fue cancelada");
     }
 
+    @Override
     public void quitarItem(Reserva reserva, ItemCatalogo item) {
         throw new OperacionInvalida("No se pueden quitar servicios la reserva fue cancelada");
     }
+
 }

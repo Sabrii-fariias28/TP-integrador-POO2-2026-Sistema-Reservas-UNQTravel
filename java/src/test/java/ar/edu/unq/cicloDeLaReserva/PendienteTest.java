@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ar.edu.unq.ItemCatalogo;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class PendienteTest {
@@ -13,19 +15,19 @@ public class PendienteTest {
 
     @BeforeEach
     void setUp() {
-        pendiente = new Pendiente();
         reservaMock = mock(Reserva.class);
         itemMock = mock(ItemCatalogo.class);
+        pendiente = new Pendiente();
     }
 
     @Test
-    void agregarItemDelegaEnLaReserva() {
+    void testAgregarItem_DelegaEnLaReserva() {
         pendiente.agregarItem(reservaMock, itemMock);
         verify(reservaMock).agregarItem(itemMock);
     }
 
     @Test
-    void confirmarReservaEjecutaPagoCambiaEstadoYDecrementaCupos() {
+    void testConfirmarReserva_EjecutaPagoCambiaEstadoYDecrementaCupos() {
         pendiente.confirmarReserva(reservaMock);
 
         verify(reservaMock).realizarPago();
@@ -34,9 +36,16 @@ public class PendienteTest {
     }
 
     @Test
-    void cancelarReservaCambiaElEstadoACancelada() {
+    void testCancelarReserva_CambiaEstadoACancelada() {
         pendiente.cancelarReserva(reservaMock);
         verify(reservaMock).cambiarEstado(any(Cancelada.class));
     }
 
+    @Test
+    void testRealizarCheckIn_EstandoPendiente_LanzaExcepcion() {
+        Exception excepcion = assertThrows(OperacionInvalida.class, () ->
+                pendiente.realizarCheckIn(reservaMock)
+        );
+        assertEquals("No se puede realizar el check-in", excepcion.getMessage());
+    }
 }

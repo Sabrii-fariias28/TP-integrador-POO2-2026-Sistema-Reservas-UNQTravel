@@ -24,6 +24,7 @@ class ReservaTest {
 
         servicio = mock(ItemCatalogo.class);
 
+        // Aca pongo el mock para que devuelva true por defecto al consultar disponibilidad
         when(servicio.estaDisponible(
                 any(LocalDate.class),
                 any(LocalDate.class),
@@ -39,12 +40,14 @@ class ReservaTest {
     @Test
     void unaReservaPermiteAgregarUnServicioDisponible() {
         reserva.agregarItem(servicio);
+
         assertTrue(reserva.getServicios().contains(servicio));
     }
 
     @Test
     void unaReservaPermiteQuitarUnServicioAgregado() {
         reserva.agregarItem(servicio);
+
         reserva.quitarItem(servicio);
 
         assertFalse(reserva.getServicios().contains(servicio));
@@ -52,18 +55,18 @@ class ReservaTest {
 
     @Test
     void unaReservaNoPermiteAgregarUnServicioSinDisponibilidad() {
-
         when(servicio.estaDisponible(
                 eq(LocalDate.of(2026, 12, 10)),
                 eq(LocalDate.of(2026, 12, 15)),
                 eq(2)
         )).thenReturn(false);
 
-        assertThrows(
+        Exception excepcion = assertThrows(
                 SinDisponibilidad.class,
                 () -> reserva.agregarItem(servicio)
         );
 
+        assertEquals("El servicio no se puede añadir, no tiene disponibilidad.", excepcion.getMessage());
         assertTrue(reserva.getServicios().isEmpty());
     }
 
@@ -77,12 +80,12 @@ class ReservaTest {
                 anyInt()
         )).thenReturn(true);
 
-        when(servicio.precioFinal()).thenReturn(100.0);
-        when(otroServicio.precioFinal()).thenReturn(200.0);
+        when(servicio.precioFinal()).thenReturn(1000.0);
+        when(otroServicio.precioFinal()).thenReturn(2000.0);
 
         reserva.agregarItem(servicio);
         reserva.agregarItem(otroServicio);
 
-        assertEquals(300.0, reserva.calcularPrecioTotal(), 0.001);
+        assertEquals(3000.0, reserva.calcularPrecioTotal(), 0.001);
     }
 }
