@@ -2,6 +2,7 @@ package ar.edu.unq.metodoDePago;
 
 public class BilleteraVirtual extends MetodoDePago{
     private double saldo;
+
     @Override
     public void validarDatos() {
 
