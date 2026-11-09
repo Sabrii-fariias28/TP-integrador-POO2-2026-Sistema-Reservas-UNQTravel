@@ -1,6 +1,7 @@
 package ar.edu.unq.cicloDeLaReserva;
 
 import ar.edu.unq.ItemCatalogo;
+import ar.edu.unq.metodoDePago.MetodoDePago;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class Reserva extends EstadoReserva{
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     //private NotificadorManager notificador; Cuando Dami haga push a su rama lo descomento...
-    //private MetodoDePago metodoDePago;
+    private MetodoDePago metodoDePago;
 
     //Acordarme de poner en el contructor el met de pago y el notificador cuando lo hagamos
     public Reserva(int cantPersonas,  LocalDate fechaInicio, LocalDate fechaFin) {
@@ -62,7 +63,7 @@ public class Reserva extends EstadoReserva{
     public void reembolsarTotalCostos(){};
     public void reembolsarCostos(){};
     public void realizarPago(){
-       //metodoDePago.realizarPago(calcularPrecioTotal());
+       metodoDePago.realizarPago(calcularPrecioTotal());
     };
 
     public double calcularPrecioTotal(){
