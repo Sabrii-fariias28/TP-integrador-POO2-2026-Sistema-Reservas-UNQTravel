@@ -23,4 +23,9 @@ public class Cancelada extends EstadoReserva{
         throw new OperacionInvalida("No se pueden quitar servicios la reserva fue cancelada");
     }
 
+    @Override
+    public void cancelarReserva(Reserva reserva) {
+        throw new OperacionInvalida("No se puede cancelar la reserva porque ya fue cancelada");
+    }
+
 }

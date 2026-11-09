@@ -2,7 +2,7 @@ package ar.edu.unq.cicloDeLaReserva;
 
 import ar.edu.unq.ItemCatalogo;
 
-public class EstadoReserva {
+public abstract class EstadoReserva {
 
     public void agregarItem(Reserva reserva, ItemCatalogo item) {
         throw new OperacionInvalida("No se pueden agregar servicios");
@@ -16,9 +16,7 @@ public class EstadoReserva {
         throw new OperacionInvalida("No se puede confirmar la reserva");
     }
 
-    public void cancelarReserva(Reserva reserva) {
-        throw new OperacionInvalida("No se puede cancelar la reserva");
-    }
+    public abstract void cancelarReserva(Reserva reserva);
 
     public void realizarCheckIn(Reserva reserva) {
         throw new OperacionInvalida("No se puede realizar el check-in");

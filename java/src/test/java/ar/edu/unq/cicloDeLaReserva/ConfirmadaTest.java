@@ -37,17 +37,13 @@ class ConfirmadaTest {
 
     @Test
     void testAgregarItem_CuandoLaReservaEstaConfirmada_LanzaExcepcion() {
-        Exception excepcion = assertThrows(OperacionInvalida.class, () ->
-                confirmada.agregarItem(reservaMock, itemMock)
-        );
+        Exception excepcion = assertThrows(OperacionInvalida.class, () -> confirmada.agregarItem(reservaMock, itemMock));
         assertEquals("No se pueden agregar servicios porque la reserva ya está confirmada", excepcion.getMessage());
     }
 
     @Test
     void testQuitarItem_КогдаLaReservaEstaConfirmada_LanzaExcepcion() {
-        Exception excepcion = assertThrows(OperacionInvalida.class, () ->
-                confirmada.quitarItem(reservaMock, itemMock)
-        );
+        Exception excepcion = assertThrows(OperacionInvalida.class, () -> confirmada.quitarItem(reservaMock, itemMock));
         assertEquals("No se pueden agregar servicios porque la reserva ya está confirmada", excepcion.getMessage());
     }
 }

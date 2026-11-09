@@ -33,9 +33,7 @@ public class EnCursoTest {
 
     @Test
     void testConfirmarViaje_EstandoEnCurso_LanzaExcepcion() {
-        Exception excepcion = assertThrows(OperacionInvalida.class, () ->
-                enCurso.confirmarViaje(reservaMock)
-        );
+        Exception excepcion = assertThrows(OperacionInvalida.class, () -> enCurso.confirmarViaje(reservaMock));
         assertEquals("No se puede confirmar el viaje", excepcion.getMessage());
     }
 }

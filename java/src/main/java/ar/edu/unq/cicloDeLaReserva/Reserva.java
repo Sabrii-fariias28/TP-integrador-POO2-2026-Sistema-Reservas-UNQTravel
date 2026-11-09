@@ -7,10 +7,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Reserva extends EstadoReserva{
+public class Reserva{
     private List<ItemCatalogo> servicios;
     private EstadoReserva estado;
-    private int cantPersonas; //revisar...
+    private int cantPersonas;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private MetodoDePago metodoDePago;
@@ -27,9 +27,8 @@ public class Reserva extends EstadoReserva{
     }
 
     public void agregarItem(ItemCatalogo item){
-        if(item.estaDisponible(fechaInicio,fechaFin,cantPersonas)){
+        if(item.estaDisponibleEnRango(fechaInicio,fechaFin,cantPersonas)){
             this.servicios.add(item);
-            // item.decrementarCupo(...) Cuando Gonza termine su rama lo descomento
         } else{
             throw new SinDisponibilidad("El servicio no se puede añadir, no tiene disponibilidad.");
         }
@@ -37,7 +36,6 @@ public class Reserva extends EstadoReserva{
 
     public void quitarItem(ItemCatalogo item){
         this.servicios.remove(item);
-       // item.aumentarCupo(1); Cuando Gonza termine su rama lo descomento
     }
 
     public void confirmar(){
@@ -53,14 +51,13 @@ public class Reserva extends EstadoReserva{
     }
 
     public void incrementarCuposAItems(){
-        //teniendo la lista de los items se tienen que liberar todos a la vez
+        servicios.forEach(item -> item.cancelar(fechaInicio, fechaFin, cantPersonas));
     }
 
     public void decrementarCuposAItems(){
-        //teniendo la lista de los items se tienen que descontar todos los cupos a la vez
+        servicios.forEach(item -> item.reservarRango(fechaInicio, fechaFin, cantPersonas));
     }
 
-    //estos lo tengo que agregar al UML
     public void reembolsarTotalCostos(){
         metodoDePago.realizarReembolso(calcularPrecioTotal());
     };

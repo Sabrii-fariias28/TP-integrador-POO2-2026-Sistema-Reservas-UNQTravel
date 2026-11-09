@@ -43,9 +43,7 @@ public class PendienteTest {
 
     @Test
     void testRealizarCheckIn_EstandoPendiente_LanzaExcepcion() {
-        Exception excepcion = assertThrows(OperacionInvalida.class, () ->
-                pendiente.realizarCheckIn(reservaMock)
-        );
+        Exception excepcion = assertThrows(OperacionInvalida.class, () -> pendiente.realizarCheckIn(reservaMock));
         assertEquals("No se puede realizar el check-in", excepcion.getMessage());
     }
 }

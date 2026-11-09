@@ -31,9 +31,7 @@ public class CheckInTest {
 
     @Test
     void testFinalizarViaje_EstandoEnCheckIn_LanzaExcepcion() {
-        Exception excepcion = assertThrows(OperacionInvalida.class, () ->
-                checkIn.finalizarViaje(reservaMock)
-        );
+        Exception excepcion = assertThrows(OperacionInvalida.class, () -> checkIn.finalizarViaje(reservaMock));
         assertEquals("No se puede finalizar el viaje", excepcion.getMessage());
     }
 }
