@@ -3,10 +3,8 @@ package ar.edu.unq.cicloDeLaReserva;
 import ar.edu.unq.ItemCatalogo;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class Reserva extends EstadoReserva{
     private List<ItemCatalogo> servicios;
@@ -18,14 +16,12 @@ public class Reserva extends EstadoReserva{
     //private MetodoDePago metodoDePago;
 
     //Acordarme de poner en el contructor el met de pago y el notificador cuando lo hagamos
-    public Reserva(int cantPersonas) {
+    public Reserva(int cantPersonas,  LocalDate fechaInicio, LocalDate fechaFin) {
         this.servicios = new ArrayList<>();
         this.estado = new Pendiente();
         this.cantPersonas = cantPersonas;
-    }
-
-    public List<ItemCatalogo> getItemsCatalogo(){
-        return this.servicios;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
     }
 
     public void agregarItem(ItemCatalogo item){
@@ -45,6 +41,7 @@ public class Reserva extends EstadoReserva{
     public void confirmar(){
         estado.confirmarReserva(this);
     }
+
     public void cancelar(){
         estado.cancelarReserva(this);
     }
@@ -73,6 +70,27 @@ public class Reserva extends EstadoReserva{
                 .mapToDouble(ItemCatalogo::precioFinal)
                 .sum();
     }
+
+    public List<ItemCatalogo> getServicios() {
+        return servicios;
+    }
+
+    public EstadoReserva getEstado() {
+        return estado;
+    }
+
+    public int getCantPersonas() {
+        return cantPersonas;
+    }
+
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public LocalDate getFechaFin() {
+        return fechaFin;
+    }
+
 }
 
 
