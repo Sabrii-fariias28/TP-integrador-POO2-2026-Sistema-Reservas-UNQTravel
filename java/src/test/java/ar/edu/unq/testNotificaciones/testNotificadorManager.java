@@ -12,21 +12,17 @@ import static org.mockito.Mockito.*;
 public class testNotificadorManager {
     private NotificadorManager notificadorManager;
     private ArrayList<Notificador> notificadoresList;
-    private Notificador iNotificador;
     private NotificadorEmail mailNotificador;
     private Fidelizacion fidelizacion;
-    private GeneradorVoucher generadorVoucher;
-    private Estado estado;
+    private EnCurso enCurso;
 
     @BeforeEach
     public void setUp() throws Exception {
         // DOC : mock
-        iNotificador = mock(Notificador.class);
         mailNotificador = mock(NotificadorEmail.class);
         fidelizacion = mock(Fidelizacion.class);
-        generadorVoucher = mock(GeneradorVoucher.class);
         notificadoresList = new ArrayList<>();
-        estado = new Estado();
+        enCurso = mock(EnCurso.class);
 
         // SUT
         notificadorManager = new NotificadorManager(notificadoresList);
@@ -40,6 +36,8 @@ public class testNotificadorManager {
 
     @Test
     public void testQuitarNotificador() {
+        notificadorManager.agregarNotificador(mailNotificador);
+        assertTrue(notificadorManager.getNotificadores().contains(mailNotificador));
         notificadorManager.quitarNotificador(mailNotificador);
         assertTrue(notificadorManager.getNotificadores().isEmpty());
     }
@@ -48,8 +46,8 @@ public class testNotificadorManager {
     public void testNotificarEstados(){
         notificadorManager.agregarNotificador(mailNotificador);
         notificadorManager.agregarNotificador(fidelizacion);
-        notificadorManager.actualizarEstado(estado, estado);
-        verify(mailNotificador).actualizarEstado(estado , estado);
-        verify(fidelizacion).actualizarEstado(estado, estado);
+        notificadorManager.actualizarEstado(enCurso, fidelizacion);
+        verify(mailNotificador).actualizarEstado(enCurso , fidelizacion);
+        verify(fidelizacion).actualizarEstado(enCurso, fidelizacion);
     }
 }
