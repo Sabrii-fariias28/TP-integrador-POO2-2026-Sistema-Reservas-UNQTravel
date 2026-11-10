@@ -8,7 +8,8 @@ public class CheckIn extends EstadoReserva{
 
     @Override
     public void cancelarReserva(Reserva reserva) {
-        // Me tengo que fijar como hacer el reintegro de servicios y cargos de reserva, me imagino que por el metodo de pago¿¿¿
+        reserva.incrementarCuposAItems();
+        reserva.reembolsarTotalCostos();// Me tengo que fijar como hacer el reintegro de servicios y cargos de reserva, me imagino que por el metodo de pago¿¿¿
         reserva.cambiarEstado(new Cancelada());
     }
 }

@@ -43,4 +43,12 @@ public class CanceladaTest {
         );
         assertEquals("No se pueden agregar servicios: la reserva fue cancelada", excepcion.getMessage());
     }
+
+    @Test
+    void testCancelarReserva_CuandoEstaCancelada_LanzaExcepcion() {
+        Exception excepcion = assertThrows(OperacionInvalida.class, () ->
+                cancelada.cancelarReserva(reservaMock)
+        );
+        assertEquals("No se puede cancelar la reserva porque ya fue cancelada", excepcion.getMessage());
+    }
 }
