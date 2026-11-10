@@ -60,16 +60,25 @@ public class Reserva{
 
     public void reembolsarTotalCostos(){
         metodoDePago.realizarReembolso(calcularPrecioTotal());
-    };
-    public void reembolsarCostos(){};
+    }
+
+    public void reembolsarCostosTasas(){
+        metodoDePago.realizarReembolso(tasasAdministracion());
+    }
+
     public void realizarPago(){
        metodoDePago.realizarPago(calcularPrecioTotal());
-    };
+    }
 
     public double calcularPrecioTotal(){
         return servicios.stream()
                 .mapToDouble(ItemCatalogo::precioFinal)
                 .sum();
+    }
+
+    //REVISAR #PREGUNTAR #LOdijoDemi
+    private double tasasAdministracion(){
+        return 5000;
     }
 
     public List<ItemCatalogo> getServicios() {
@@ -90,6 +99,10 @@ public class Reserva{
 
     public LocalDate getFechaFin() {
         return fechaFin;
+    }
+
+    public void setMetodoDePago(MetodoDePago metodoPagoNuevo) {
+        this.metodoDePago = metodoPagoNuevo;
     }
 
 }

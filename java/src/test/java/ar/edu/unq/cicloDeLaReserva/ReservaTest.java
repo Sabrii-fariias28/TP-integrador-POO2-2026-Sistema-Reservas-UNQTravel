@@ -107,6 +107,7 @@ class ReservaTest {
     void unaReservaGuardaLaFechaDeFin() {
         assertEquals(LocalDate.of(2026, 12, 15), reserva.getFechaFin());
     }
+
     @Test
     void testAlConfirmarReserva_ReservaElRangoEnSusServicios() {
         reserva.agregarItem(item1);
