@@ -1,7 +1,5 @@
 package ar.edu.unq.notificadores;
-
-import ar.edu.unq.Estado;//BORRAR ES PARA TEST AL NO TENER LOS STATES
-
+import ar.edu.unq.cicloDeLaReserva.EstadoReserva;
 import java.util.ArrayList;
 
 public class NotificadorManager {
@@ -11,7 +9,7 @@ public class NotificadorManager {
         this.notificadores = n;
     }
 
-    public void actualizarEstado(Estado estadoAnterior, Estado estadoNuevo){
+    public void actualizarEstado(EstadoReserva estadoAnterior, EstadoReserva estadoNuevo){
         for (Notificador notif : notificadores){
             notif.actualizarEstado(estadoAnterior, estadoNuevo);
         }

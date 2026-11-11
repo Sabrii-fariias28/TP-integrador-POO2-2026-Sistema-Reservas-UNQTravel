@@ -1,8 +1,5 @@
 package ar.edu.unq.testNotificaciones;
-
-import ar.edu.unq.EstadoReserva;
-import ar.edu.unq.Finalizada;
-import ar.edu.unq.Confirmada;
+import ar.edu.unq.cicloDeLaReserva.*;
 import ar.edu.unq.notificadores.GeneradorVoucher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

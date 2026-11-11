@@ -1,8 +1,10 @@
 package ar.edu.unq.notificadores;
 
+import ar.edu.unq.cicloDeLaReserva.EstadoReserva;
+
 public class NotificadorEmail implements Notificador {
 
-    public void actualizarEstado(Estado estadoAnterior, Estado estadoNuevo){
+    public void actualizarEstado(EstadoReserva estadoAnterior, EstadoReserva estadoNuevo){
         if (estadoNuevo.requiereNotificacionEmail()){
             MailSender.enviarMail(
                     "correoCliente@gmail.com",

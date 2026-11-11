@@ -1,12 +1,9 @@
 package ar.edu.unq.testNotificaciones;
 
-import ar.edu.unq.EstadoReserva;
-import ar.edu.unq.Cancelada;
-import ar.edu.unq.Pendiente;
+import ar.edu.unq.cicloDeLaReserva.*;
 import ar.edu.unq.notificadores.Fidelizacion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FidelizacionTest {
