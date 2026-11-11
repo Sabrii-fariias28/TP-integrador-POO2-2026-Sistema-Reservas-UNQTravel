@@ -60,11 +60,12 @@ public abstract class ItemCatalogo {
 
         // Recorrer el rango de fechas día por día
         for (LocalDate fecha = fechaInicio; !fecha.isAfter(fechaFin); fecha = fecha.plusDays(1)) {
-            Disponibilidad disp = buscarPorFecha(fecha)
-                    .orElseThrow(() -> new IllegalArgumentException("No se puede reservar en la fecha: " + fecha));
+            LocalDate fechaActual = fecha;
+            Disponibilidad disp = buscarPorFecha(fechaActual)
+                    .orElseThrow(() -> new IllegalArgumentException("No se puede reservar en la fecha: " + fechaActual));
             /* Verificar si hay cupo para ese día específico*/
             if (!disp.hayLugar(personas)) {
-                throw new IllegalArgumentException("Cupo insuficiente para el día: " + fecha);
+                throw new IllegalArgumentException("Cupo insuficiente para el día: " + fechaActual);
             }
 
             diasAApartar.add(disp);
@@ -79,13 +80,15 @@ public abstract class ItemCatalogo {
     public void cancelar(LocalDate fechaInicio, LocalDate fechaFin, int personas){
         List<Disponibilidad> diasACancelar = new ArrayList<>();
 
+
         // Recorrer el rango de fechas día por día
         for (LocalDate fecha = fechaInicio; !fecha.isAfter(fechaFin); fecha = fecha.plusDays(1)) {
-            Disponibilidad disp = buscarPorFecha(fecha)
-                    .orElseThrow(() -> new IllegalArgumentException("No se puede cancelar si no hay reserva en la fecha: " + fecha));
+            LocalDate fechaActual = fecha;
+            Disponibilidad disp = buscarPorFecha(fechaActual)
+                    .orElseThrow(() -> new IllegalArgumentException("No se puede cancelar si no hay reserva en la fecha: " + fechaActual));
             /* Verificar si hay cupo para ese día específico*/
             if (!disp.puedeCancelar(personas)) {
-                throw new IllegalArgumentException("Cupo insuficiente para el día: " + fecha);
+                throw new IllegalArgumentException("Cupo insuficiente para el día: " + fechaActual);
             }
 
             diasACancelar.add(disp);
