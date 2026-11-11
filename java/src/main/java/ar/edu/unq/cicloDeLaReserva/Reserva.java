@@ -2,6 +2,7 @@ package ar.edu.unq.cicloDeLaReserva;
 
 import ar.edu.unq.ItemCatalogo;
 import ar.edu.unq.metodoDePago.MetodoDePago;
+import ar.edu.unq.notificadores.NotificadorManager;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,16 +15,17 @@ public class Reserva{
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private MetodoDePago metodoDePago;
-    //private NotificadorManager notificador; Cuando Dami haga push a su rama lo descomento...
+    private NotificadorManager notificadorManager;
 
     //Acordarme de poner en el contructor el notificador cuando lo hagamos
-    public Reserva(int cantPersonas,  LocalDate fechaInicio, LocalDate fechaFin, MetodoDePago metodoDePago) {
+    public Reserva(int cantPersonas,  LocalDate fechaInicio, LocalDate fechaFin, MetodoDePago metodoDePago, NotificadorManager notificador) {
         this.servicios = new ArrayList<>();
         this.estado = new Pendiente();
         this.cantPersonas = cantPersonas;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.metodoDePago = metodoDePago;
+        this.notificadorManager = notificador;
     }
 
     public void agregarItem(ItemCatalogo item){
@@ -47,7 +49,9 @@ public class Reserva{
     }
 
     public void cambiarEstado(EstadoReserva nuevoEstado){
+        EstadoReserva estadoAnterior = this.getEstado();
         this.estado = nuevoEstado;
+        notificadorManager.actualizarEstado(estadoAnterior, nuevoEstado);
     }
 
     public void incrementarCuposAItems(){

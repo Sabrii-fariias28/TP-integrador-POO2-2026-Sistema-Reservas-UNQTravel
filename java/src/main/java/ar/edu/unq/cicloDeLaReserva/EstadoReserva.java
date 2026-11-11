@@ -29,4 +29,10 @@ public abstract class EstadoReserva {
     public void finalizarViaje(Reserva reserva) {
         throw new OperacionInvalida("No se puede finalizar el viaje");
     }
+
+    public boolean requiereNotificacionEmail(){ return false;}
+
+    public boolean requiereVoucher(){ return false;}
+
+    public boolean requiereFidelizacion(){ return false;}
 }

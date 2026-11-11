@@ -3,6 +3,7 @@ package ar.edu.unq.cicloDeLaReserva;
 import ar.edu.unq.ItemCatalogo;
 
 import ar.edu.unq.metodoDePago.MetodoDePago;
+import ar.edu.unq.notificadores.NotificadorManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ class ReservaTest {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private MetodoDePago metodoPagoMock;
-
+    private NotificadorManager notificadorManager;
     private ItemCatalogo item1;
     private ItemCatalogo item2;
     private ItemCatalogo item3;
@@ -26,9 +27,9 @@ class ReservaTest {
     void setUp() {
         fechaInicio = LocalDate.of(2026, 12, 10);
         fechaFin = LocalDate.of(2026, 12, 15);
-
+        notificadorManager = mock(NotificadorManager.class);
         metodoPagoMock = mock(MetodoDePago.class);
-        reserva = new Reserva(2, fechaInicio, fechaFin, metodoPagoMock);
+        reserva = new Reserva(2, fechaInicio, fechaFin, metodoPagoMock, notificadorManager);
         item1 = mock(ItemCatalogo.class);
         item2 = mock(ItemCatalogo.class);
         item3 = mock(ItemCatalogo.class);

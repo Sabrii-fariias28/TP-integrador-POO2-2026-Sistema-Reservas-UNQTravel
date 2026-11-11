@@ -11,4 +11,7 @@ public class EnCurso extends EstadoReserva{
         reserva.reembolsarCostosTasas();// solo se reembolsa el costo de los servicios no disfrutados pero no de las tasas administrativas.
         reserva.cambiarEstado(new Cancelada());
     }
+
+    @Override
+    public boolean requiereNotificacionEmail(){return true;}
 }

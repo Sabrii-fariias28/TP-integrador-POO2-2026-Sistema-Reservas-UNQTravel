@@ -15,8 +15,15 @@ public class Finalizada extends EstadoReserva{
     public void finalizarViaje(Reserva reserva) {
         throw new OperacionInvalida("El viaje ya se encuentra finalizado");
     }
+
     @Override
     public void cancelarReserva(Reserva reserva) {
         throw new OperacionInvalida("No se puede cancelar el viaje : El viaje ya se encuentra finalizado");
     }
+
+    @Override
+    public boolean requiereNotificacionEmail(){return true;}
+
+    @Override
+    public boolean requiereVoucher(){return true;}
 }

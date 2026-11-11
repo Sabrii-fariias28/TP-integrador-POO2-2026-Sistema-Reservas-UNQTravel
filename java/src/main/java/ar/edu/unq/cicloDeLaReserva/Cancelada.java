@@ -28,4 +28,6 @@ public class Cancelada extends EstadoReserva{
         throw new OperacionInvalida("No se puede cancelar la reserva porque ya fue cancelada");
     }
 
+    @Override
+    public boolean requiereFidelizacion(){return true;}
 }
