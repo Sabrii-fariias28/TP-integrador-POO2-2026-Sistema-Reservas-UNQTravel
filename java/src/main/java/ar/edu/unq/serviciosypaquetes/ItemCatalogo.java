@@ -105,4 +105,6 @@ public abstract class ItemCatalogo {
     }
 
     abstract public boolean contieneNombre(String nombre);
+
+    abstract public boolean contieneCategoria(String categoria);
 }

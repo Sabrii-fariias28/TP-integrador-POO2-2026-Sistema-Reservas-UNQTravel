@@ -32,4 +32,9 @@ public class PaqueteTuristico extends ItemCatalogo {
         boolean coincideAlgunContenido = this.contenido.stream().anyMatch(item -> item.contieneNombre(nombre));
         return coincideAlgunContenido || coincidePaquete;
     }
+
+    @Override
+    public boolean contieneCategoria(String categoria){
+        return this.contenido.stream().anyMatch(item -> item.contieneCategoria(categoria));
+    }
 }

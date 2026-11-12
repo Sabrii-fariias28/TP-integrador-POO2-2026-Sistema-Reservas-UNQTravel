@@ -2,6 +2,7 @@ package ar.edu.unq.BusquedaDeCatalogo;
 import ar.edu.unq.Catalogo;
 import ar.edu.unq.serviciosypaquetes.ItemCatalogo;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Buscador {
     private Catalogo catalogo;
@@ -11,8 +12,9 @@ public class Buscador {
     }
 
     public ArrayList<ItemCatalogo> buscar(Criterio filtro){
-        ArrayList<ItemCatalogo> itemsFiltrados = catalogo.getItems();
-        itemsFiltrados.stream().filter(item -> filtro.cumpleCriterio(item));
-        return itemsFiltrados;
+        List<ItemCatalogo> filtrados = catalogo.getItems().stream()
+                .filter(filtro::cumpleCriterio)
+                .toList();
+        return new ArrayList<>(filtrados);
     }
 }

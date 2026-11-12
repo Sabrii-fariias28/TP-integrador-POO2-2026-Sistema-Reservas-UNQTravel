@@ -12,7 +12,7 @@ public class CriterioPorDisponibilidad implements Criterio{
         //this.fechaFin = fechaFin;
         this.cantPersonas = cantPersonas;
     }
-
+    // ME GUSTARIA CAMBIARLO A QUE PREGUNTE POR UN RANGO DE FECHAS Y TAMBIEN POR EL DESTINO
     @Override
     public boolean cumpleCriterio(ItemCatalogo item){
         return item.estaDisponible(fecha, cantPersonas);
