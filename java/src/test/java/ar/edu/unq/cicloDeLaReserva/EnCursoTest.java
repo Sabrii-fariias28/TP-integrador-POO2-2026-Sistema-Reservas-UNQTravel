@@ -27,7 +27,7 @@ public class EnCursoTest {
     void testCancelarReserva_ReembolsaCostosYCambiaACancelada() {
         enCurso.cancelarReserva(reservaMock);
 
-        verify(reservaMock).reembolsarCostosTasas();
+        verify(reservaMock).reembolsarServicios();
         verify(reservaMock).cambiarEstado(any(Cancelada.class));
     }
 
