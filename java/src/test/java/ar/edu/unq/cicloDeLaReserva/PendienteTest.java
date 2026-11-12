@@ -27,6 +27,12 @@ public class PendienteTest {
     }
 
     @Test
+    void testQuitarItem_DelegaEnLaReserva() {
+        pendiente.quitarItem(reservaMock, itemMock);
+        verify(reservaMock).quitarItem(itemMock);
+    }
+
+    @Test
     void testConfirmarReserva_EjecutaPagoCambiaEstadoYDecrementaCupos() {
         pendiente.confirmarReserva(reservaMock);
 
