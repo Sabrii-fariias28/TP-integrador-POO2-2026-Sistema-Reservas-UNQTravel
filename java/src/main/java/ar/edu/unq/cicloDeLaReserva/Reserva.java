@@ -16,7 +16,6 @@ public class Reserva{
     private MetodoDePago metodoDePago;
     private NotificadorManager notificadorManager;
 
-    //Acordarme de poner en el contructor el notificador cuando lo hagamos
     public Reserva(int cantPersonas,  LocalDate fechaInicio, LocalDate fechaFin, MetodoDePago metodoDePago, NotificadorManager notificador) {
         this.servicios = new ArrayList<>();
         this.estado = new Pendiente();
@@ -62,9 +61,12 @@ public class Reserva{
     }
 
     public void reembolsarTotalCostos(){
-        metodoDePago.realizarReembolso(calcularPrecioTotal());
+        metodoDePago.realizarReembolso(calcularPrecioTotal() + tasasAdministracion());
     }
 
+    public void reembolsarServicios(){
+        metodoDePago.realizarPago(calcularPrecioTotal());
+    }
     public void reembolsarCostosTasas(){
         metodoDePago.realizarReembolso(tasasAdministracion());
     }
