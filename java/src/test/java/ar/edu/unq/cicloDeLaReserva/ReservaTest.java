@@ -142,4 +142,55 @@ class ReservaTest {
         assertEquals(1, reserva.getServicios().size());
     }
 
+    @Test
+    void unaReservaRealizaElPagoTotal() {
+        when(item1.precioFinal()).thenReturn(1500.0);
+
+        reserva.agregarItem(item1);
+        reserva.realizarPago();
+
+        verify(metodoPagoMock).realizarPago(1500.0);
+    }
+
+    @Test
+    void unaReservaRealizaElReembolsoTotal() {
+        when(item1.precioFinal()).thenReturn(2000.0);
+
+        reserva.agregarItem(item1);
+        reserva.reembolsarTotalCostos();
+
+        verify(metodoPagoMock).realizarReembolso(2000.0);
+    }
+
+    @Test
+    void unaReservaRealizaElReembolsoDeTasasAdministrativas() {
+        reserva.reembolsarCostosTasas();
+
+        // Verifica que reembolsa el monto fijo de tasas (5000.0)
+        verify(metodoPagoMock).realizarReembolso(5000.0);
+    }
+
+    @Test
+    void permiteCambiarElMetodoDePagoYUtilizarElNuevo() {
+        MetodoDePago nuevoMetodoPago = mock(MetodoDePago.class);
+        reserva.setMetodoDePago(nuevoMetodoPago);
+
+        when(item1.precioFinal()).thenReturn(1000.0);
+        reserva.agregarItem(item1);
+        reserva.realizarPago();
+
+        // Verifica que se usó el nuevo método de pago y no el mock original del setUp
+        verify(nuevoMetodoPago).realizarPago(1000.0);
+        verify(metodoPagoMock, never()).realizarPago(anyDouble());
+    }
+
+    @Test
+    void testAlCancelarReserva_IncrementaCuposEnSusServiciosSiEstabanReservados() {
+        reserva.agregarItem(item1);
+        reserva.confirmar(); // Primero se confirman (decrementar)
+        reserva.cancelar();  // Luego se cancelan (incrementar cupos)
+
+        verify(item1).cancelar(eq(fechaInicio), eq(fechaFin), eq(2));
+    }
+
 }
