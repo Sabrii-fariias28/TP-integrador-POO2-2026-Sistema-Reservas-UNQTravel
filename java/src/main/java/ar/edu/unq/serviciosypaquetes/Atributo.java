@@ -1,13 +1,17 @@
 package ar.edu.unq.serviciosypaquetes;
 
-public class Atributo {
+public abstract class Atributo {
     String nombre;
     boolean indicadorObligatoriedad;
-    Object tipoDeValor;
 
-    public Atributo(String nombre, boolean obligatorio, Object valor){
+    public Atributo(String nombre, boolean obligatorio){
         this.nombre = nombre;
         this.indicadorObligatoriedad = obligatorio;
-        this.tipoDeValor = valor;
+    }
+
+    public abstract boolean esValido();
+
+    public String getNombre(){
+        return this.nombre;
     }
 }

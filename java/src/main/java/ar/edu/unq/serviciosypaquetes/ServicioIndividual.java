@@ -28,4 +28,14 @@ public class ServicioIndividual extends ItemCatalogo{
     public void agregarAtributo(Atributo a){
         listaDeAtributos.add(a);
     }
+
+    public boolean esValido() {
+        boolean fijosValidos = (this.getId() != null && !this.getId().isBlank()) &&
+                               (this.getNombre() != null && !this.getNombre().isBlank());
+
+        boolean dinamicosValidos = this.listaDeAtributos.stream()
+                                    .allMatch(Atributo::esValido);
+
+        return fijosValidos && dinamicosValidos;
+    }
 }

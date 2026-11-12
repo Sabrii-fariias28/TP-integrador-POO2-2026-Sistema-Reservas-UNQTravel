@@ -63,7 +63,7 @@ public abstract class ItemCatalogo {
             LocalDate fechaActual = fecha;
             Disponibilidad disp = buscarPorFecha(fechaActual)
                     .orElseThrow(() -> new IllegalArgumentException("No se puede reservar en la fecha: " + fechaActual));
-            /* Verificar si hay cupo para ese día específico*/
+            // Verificar si hay cupo para ese día específico
             if (!disp.hayLugar(personas)) {
                 throw new IllegalArgumentException("Cupo insuficiente para el día: " + fechaActual);
             }
@@ -86,15 +86,15 @@ public abstract class ItemCatalogo {
             LocalDate fechaActual = fecha;
             Disponibilidad disp = buscarPorFecha(fechaActual)
                     .orElseThrow(() -> new IllegalArgumentException("No se puede cancelar si no hay reserva en la fecha: " + fechaActual));
-            /* Verificar si hay cupo para ese día específico*/
+            /* Verificar si puede cancelar ese dia*/
             if (!disp.puedeCancelar(personas)) {
-                throw new IllegalArgumentException("Cupo insuficiente para el día: " + fechaActual);
+                throw new IllegalArgumentException("No hay cupos para el día: " + fechaActual);
             }
 
             diasACancelar.add(disp);
         }
 
-        //  Si todos los días son válidos, confirmamos la reserva para el grupo de dias
+        //  Si todos los días existen como cupos, procedemos a cancelarlos
         for (Disponibilidad disp : diasACancelar) {
             disp.cancelarReservas(personas);
         }
