@@ -1,6 +1,6 @@
 package ar.edu.unq.cicloDeLaReserva;
 
-import ar.edu.unq.ItemCatalogo;
+import ar.edu.unq.serviciosypaquetes.*;
 
 public abstract class EstadoReserva {
 

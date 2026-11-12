@@ -1,5 +1,5 @@
 package ar.edu.unq.cicloDeLaReserva;
-import ar.edu.unq.ItemCatalogo;
+import ar.edu.unq.serviciosypaquetes.*;
 
 public class Pendiente extends EstadoReserva{
     @Override

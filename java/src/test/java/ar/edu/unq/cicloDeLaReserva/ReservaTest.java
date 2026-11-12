@@ -1,6 +1,6 @@
 package ar.edu.unq.cicloDeLaReserva;
 
-import ar.edu.unq.ItemCatalogo;
+import ar.edu.unq.serviciosypaquetes.*;
 
 import ar.edu.unq.metodoDePago.MetodoDePago;
 import ar.edu.unq.notificadores.NotificadorManager;

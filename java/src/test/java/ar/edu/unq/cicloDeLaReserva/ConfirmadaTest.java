@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ar.edu.unq.ItemCatalogo;
+import ar.edu.unq.serviciosypaquetes.*;
 
 class ConfirmadaTest {
 
