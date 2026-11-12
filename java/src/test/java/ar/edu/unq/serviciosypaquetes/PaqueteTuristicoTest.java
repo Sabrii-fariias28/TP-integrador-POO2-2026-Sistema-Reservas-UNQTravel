@@ -24,7 +24,7 @@ public class PaqueteTuristicoTest {
         when(itemMock1.getPrecioBase()).thenReturn(5000.0);
         when(itemMock2.getPrecioBase()).thenReturn(3000.0);
 
-        paquete = new PaqueteTuristico("P1", "Paquete Patagonia", new ArrayList<>(), "", "Travel Rock", itemsPredefinidos, 10.0);
+        paquete = new PaqueteTuristico("P1", "Paquete Patagonia", new ArrayList<>(), "", "Travel Rock", itemsPredefinidos, 10.0, 20.0);
 
 
     }
@@ -39,6 +39,6 @@ public class PaqueteTuristicoTest {
     void testPrecioFinalAplicaDescuentoExtraSobrePrecioBaseDelPaquete() {
         // Precio base del paquete ya es 7200. Le aplicamos un 20% de descuento promocional final.
         // 7200 - 20% = 5760
-        assertEquals(5760.0, paquete.precioFinal(20.0));
+        assertEquals(5760.0, paquete.precioFinal());
     }
 }

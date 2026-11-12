@@ -5,11 +5,13 @@ import java.util.List;
 public class PaqueteTuristico extends ItemCatalogo {
     List<ItemCatalogo> contenido;
     Double descuentoPaquete;
+    Double desc;
 
-    public PaqueteTuristico(String id, String nombre, List<Disponibilidad> cupos, String descripcion, String proveedor, List<ItemCatalogo> contenido, Double descuentoPaquete) {
+    public PaqueteTuristico(String id, String nombre, List<Disponibilidad> cupos, String descripcion, String proveedor, List<ItemCatalogo> contenido, Double descuentoPaquete, Double descuento) {
         super(id, nombre, cupos, descripcion, proveedor);
         this.contenido = contenido;
         this.descuentoPaquete = descuentoPaquete;
+        this.desc = descuento;
     }
 
     @Override
@@ -22,7 +24,11 @@ public class PaqueteTuristico extends ItemCatalogo {
     }
 
     @Override
-    public double precioFinal(double descuento) {
-        return this.getPrecioBase() - (this.getPrecioBase() * (descuento / 100));
+    public double precioFinal() {
+        return this.getPrecioBase() - (this.getPrecioBase() * (getDescuento() / 100));
+    }
+
+    public double getDescuento(){
+        return desc;
     }
 }

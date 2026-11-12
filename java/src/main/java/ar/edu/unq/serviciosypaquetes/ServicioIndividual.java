@@ -7,12 +7,14 @@ public class ServicioIndividual extends ItemCatalogo{
     String categoria;
     List<Atributo> listaDeAtributos;
     Double precioBase;
+    Double descuento;
 
-    public ServicioIndividual(String id, String nombre, List<Disponibilidad> cupos, String descripcion, String proveedor, String categoria, Double precioBase) {
+    public ServicioIndividual(String id, String nombre, List<Disponibilidad> cupos, String descripcion, String proveedor, String categoria, Double precioBase, Double descuento) {
         super(id, nombre, cupos, descripcion, proveedor);
         this.categoria = categoria;
         this.listaDeAtributos = new ArrayList<>();
         this.precioBase = precioBase;
+        this.descuento = descuento;
     }
 
     @Override
@@ -21,7 +23,7 @@ public class ServicioIndividual extends ItemCatalogo{
     }
 
     @Override
-    public double precioFinal(double descuento) {
+    public double precioFinal() {
         return this.getPrecioBase() - (this.getPrecioBase() * (descuento / 100));
     }
 
