@@ -36,4 +36,9 @@ public class EnCursoTest {
         Exception excepcion = assertThrows(OperacionInvalida.class, () -> enCurso.confirmarViaje(reservaMock));
         assertEquals("No se puede confirmar el viaje", excepcion.getMessage());
     }
+
+    @Test
+    void testRequiereNotificacionEmail_DevuelveTrue() {
+        assertTrue(enCurso.requiereNotificacionEmail());
+    }
 }
