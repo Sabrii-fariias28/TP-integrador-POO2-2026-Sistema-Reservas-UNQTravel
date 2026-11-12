@@ -27,11 +27,19 @@ public class CheckInTest {
     void testCancelarReserva_CambiaEstadoACancelada() {
         checkIn.cancelarReserva(reservaMock);
         verify(reservaMock).cambiarEstado(any(Cancelada.class));
+        verify(reservaMock).incrementarCuposAItems();
+        verify(reservaMock).reembolsarTotalCostos();
     }
 
     @Test
     void testFinalizarViaje_EstandoEnCheckIn_LanzaExcepcion() {
         Exception excepcion = assertThrows(OperacionInvalida.class, () -> checkIn.finalizarViaje(reservaMock));
         assertEquals("No se puede finalizar el viaje", excepcion.getMessage());
+    }
+
+    @Test
+    void testRealizarCheckIn_EstandoEnCheckIn_LanzaExcepcion() {
+        Exception excepcion = assertThrows(OperacionInvalida.class, () -> checkIn.realizarCheckIn(reservaMock));
+        assertEquals("No se puede realizar el check-in", excepcion.getMessage());
     }
 }
