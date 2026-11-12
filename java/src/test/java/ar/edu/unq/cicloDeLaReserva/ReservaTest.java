@@ -158,8 +158,8 @@ class ReservaTest {
 
         reserva.agregarItem(item1);
         reserva.reembolsarTotalCostos();
-
-        verify(metodoPagoMock).realizarReembolso(2000.0);
+        //El precio total es de 2000 de los servicios y 5000 de las taasas = 7000
+        verify(metodoPagoMock).realizarReembolso(7000.0);
     }
 
     @Test
