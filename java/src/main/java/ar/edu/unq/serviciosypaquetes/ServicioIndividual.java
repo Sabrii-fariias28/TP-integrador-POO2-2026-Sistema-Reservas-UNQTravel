@@ -47,6 +47,6 @@ public class ServicioIndividual extends ItemCatalogo{
 
     @Override
     public boolean contieneCategoria(String categoria){
-        return this.categoria.toLowerCase().equals(categoria);
+        return this.categoria.toLowerCase().equalsIgnoreCase(categoria);
     }
 }

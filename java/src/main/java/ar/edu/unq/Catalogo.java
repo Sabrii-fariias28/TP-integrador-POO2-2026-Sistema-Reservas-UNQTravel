@@ -10,14 +10,14 @@ public class Catalogo {
     }
 
     public void agregarItem(ItemCatalogo item){
-        items.add(item);
+        this.items.add(item);
     }
 
     public void quitarItem(ItemCatalogo item){
-        items.remove(item);
+        this.items.remove(item);
     }
 
     public ArrayList<ItemCatalogo> getItems(){
-        return items;
+        return this.items;
     }
 }
