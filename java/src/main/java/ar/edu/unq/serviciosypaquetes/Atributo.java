@@ -14,4 +14,6 @@ public abstract class Atributo {
     public String getNombre(){
         return this.nombre;
     }
+
+    //public boolean getIndicadorObligatoriedad() { return this.indicadorObligatoriedad;}
 }

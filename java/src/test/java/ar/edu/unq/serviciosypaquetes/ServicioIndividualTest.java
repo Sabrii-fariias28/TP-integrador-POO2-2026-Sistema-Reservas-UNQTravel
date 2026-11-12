@@ -2,6 +2,9 @@ package ar.edu.unq.serviciosypaquetes;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ServicioIndividualTest {
@@ -10,31 +13,50 @@ class ServicioIndividualTest {
 
     @BeforeEach
     void setUp() {
-        servicio = new ServicioIndividual("1", "Vuelo a Bariloche", 10, "Vuelo Nacional", "Aerolineas Argentinas", "Vuelo", 4000.0);
+        servicio = new ServicioIndividual("1", "Vuelo a Bariloche", new ArrayList<>(), "Vuelo Nacional", "Aerolineas Argentinas", "Vuelo", 4000.0);
     }
 
     @Test
-    void testEstaDisponibleDevuelveTrueCuandoHayCupos() {
-        // El servicio se inicializó con 10 cupos, debería estar disponible
-        assertTrue(servicio.estaDisponible(), "El servicio debería estar disponible si tiene cupos mayores a 0");
+    void testPreciosConYSinDescuento() {
+        assertEquals(4000.0, servicio.getPrecioBase());
+        // Descuento del 10%
+        assertEquals(3600.0, servicio.precioFinal(10.0));
     }
 
     @Test
-    void testEstaDisponibleDevuelveFalseCuandoNoHayCupos() {
-        // Disminuimos los cupos a 0
-        servicio.decrementarCupo(10);
+    void testEsValidoConAtributosCorrectos() {
+        servicio.agregarAtributo(new AtributoTexto("Clase", true, "Turista"));
+        servicio.agregarAtributo(new AtributoBooleano("Mascotas", true, false));
 
-        assertFalse(servicio.estaDisponible(), "El servicio no debería estar disponible si los cupos son 0");
+        assertTrue(servicio.esValido());
     }
 
     @Test
-    void testAumentarCupoCambiaLaDisponibilidad() {
-        // Forzamos a 0 cupos
-        servicio.decrementarCupo(10);
-        assertFalse(servicio.estaDisponible());
+    void testEsInvalidoSiAtributoFijoEstaVacioOAtributoDinamicoFalla() {
+        // Falla por dinámico
+        servicio.agregarAtributo(new AtributoTexto("Clase", true, null));
+        assertFalse(servicio.esValido());
 
-        // Aumentamos el cupo y verificamos que vuelva a estar disponible
-        servicio.aumentarCupo(5);
-        assertTrue(servicio.estaDisponible(), "Al aumentar los cupos, el servicio debe volver a estar disponible");
+        // Falla por fijo (nombre vacío)
+        ServicioIndividual servicioMalo = new ServicioIndividual("V1", "", new ArrayList<>(), "Desc", "Aero", "Vuelo", 100.0);
+        assertFalse(servicioMalo.esValido());
+    }
+
+    @Test
+    void testEsValidoFallaPorIdNuloOBlanco() {
+        ServicioIndividual servicioIdNulo = new ServicioIndividual(null, "Nombre", new ArrayList<>(), "Desc", "Prov", "Cat", 10.0);
+        ServicioIndividual servicioIdBlanco = new ServicioIndividual("   ", "Nombre", new ArrayList<>(), "Desc", "Prov", "Cat", 10.0);
+
+        assertFalse(servicioIdNulo.esValido());
+        assertFalse(servicioIdBlanco.esValido());
+    }
+
+    @Test
+    void testEsValidoFallaPorNombreNuloOBlanco() {
+        ServicioIndividual servicioNombreNulo = new ServicioIndividual("ID1", null, new ArrayList<>(), "Desc", "Prov", "Cat", 10.0);
+        ServicioIndividual servicioNombreBlanco = new ServicioIndividual("ID1", "   ", new ArrayList<>(), "Desc", "Prov", "Cat", 10.0);
+
+        assertFalse(servicioNombreNulo.esValido());
+        assertFalse(servicioNombreBlanco.esValido());
     }
 }

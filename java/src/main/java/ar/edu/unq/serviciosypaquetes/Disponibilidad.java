@@ -35,7 +35,7 @@ public class Disponibilidad {
     }
 
     public void cancelarReservas(int cant){
-        if (this.puedeCancelar(cant)){
+        if (!this.puedeCancelar(cant)){
             throw new RuntimeException("No hay esa cantidad de cupos confirmados para cancelar");
         }
 
