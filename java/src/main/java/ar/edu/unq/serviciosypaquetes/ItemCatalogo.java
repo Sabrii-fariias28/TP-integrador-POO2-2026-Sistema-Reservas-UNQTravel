@@ -103,4 +103,6 @@ public abstract class ItemCatalogo {
     public void agregarFecha(LocalDate fecha, int capacidad) {
         cupos.add(new Disponibilidad(fecha, capacidad));
     }
+
+    abstract public boolean contieneNombre(String nombre);
 }

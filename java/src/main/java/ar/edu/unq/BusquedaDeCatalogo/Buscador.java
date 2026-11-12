@@ -1,8 +1,6 @@
 package ar.edu.unq.BusquedaDeCatalogo;
-
 import ar.edu.unq.Catalogo;
-import ar.edu.unq.ItemCatalogo;
-
+import ar.edu.unq.serviciosypaquetes.ItemCatalogo;
 import java.util.ArrayList;
 
 public class Buscador {

@@ -1,13 +1,13 @@
 package ar.edu.unq.BusquedaDeCatalogo;
-import ar.edu.unq.ItemCatalogo;
-import java.util.Date;
+import ar.edu.unq.serviciosypaquetes.ItemCatalogo;
+import java.time.LocalDate;
 
 public class CriterioPorDisponibilidad implements Criterio{
-    private Date fecha;
+    private LocalDate fecha;
     //private Date fechaFin;
     private int cantPersonas;
 
-    public CriterioPorDisponibilidad(Date fecha, int cantPersonas){
+    public CriterioPorDisponibilidad(LocalDate fecha, int cantPersonas){
         this.fecha = fecha;
         //this.fechaFin = fechaFin;
         this.cantPersonas = cantPersonas;

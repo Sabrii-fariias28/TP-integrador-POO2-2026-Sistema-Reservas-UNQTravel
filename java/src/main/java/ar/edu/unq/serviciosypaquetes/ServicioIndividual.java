@@ -2,6 +2,7 @@ package ar.edu.unq.serviciosypaquetes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ServicioIndividual extends ItemCatalogo{
     String categoria;
@@ -37,5 +38,10 @@ public class ServicioIndividual extends ItemCatalogo{
                                     .allMatch(Atributo::esValido);
 
         return fijosValidos && dinamicosValidos;
+    }
+
+    @Override
+    public boolean contieneNombre(String nombre){
+        return this.getNombre().toLowerCase().equals(nombre);
     }
 }

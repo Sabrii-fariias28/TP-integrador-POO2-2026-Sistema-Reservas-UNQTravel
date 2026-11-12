@@ -1,6 +1,5 @@
 package ar.edu.unq.BusquedaDeCatalogo;
-
-import ar.edu.unq.ItemCatalogo;
+import ar.edu.unq.serviciosypaquetes.ItemCatalogo;
 
 public class CriterioPorNombre implements Criterio{
     private String nombreABuscar;

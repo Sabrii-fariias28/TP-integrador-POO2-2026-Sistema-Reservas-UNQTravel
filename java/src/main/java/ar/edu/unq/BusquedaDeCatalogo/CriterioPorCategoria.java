@@ -1,6 +1,5 @@
 package ar.edu.unq.BusquedaDeCatalogo;
-
-import ar.edu.unq.ItemCatalogo;
+import ar.edu.unq.serviciosypaquetes.ItemCatalogo;
 
 public class CriterioPorCategoria implements Criterio{
     private Categoria categoriaABuscar;
