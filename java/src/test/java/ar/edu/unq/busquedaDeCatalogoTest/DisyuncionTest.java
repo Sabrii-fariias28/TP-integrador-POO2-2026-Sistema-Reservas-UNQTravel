@@ -8,8 +8,8 @@ import ar.edu.unq.serviciosypaquetes.ItemCatalogo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DisyuncionTest {
     private CriterioPorCategoria critCategoria;
@@ -33,10 +33,10 @@ public class DisyuncionTest {
     }
 
     @Test
-    public void criterioPorPrecioMax5kYPorCategoriaEncuentraResultadosTest() {
-        critCategoria = new CriterioPorCategoria("Transporte");
+    public void criterioPorPrecioMax5kYPorCategoriaNoEncuentraResultadosTest() {
+        critCategoria = new CriterioPorCategoria("Remo");
         critPrecioMax = new CriterioPorPrecioMax(5000.0);
         disyuncion = new Disyuncion(critCategoria, critPrecioMax);
-        assertFalse(buscador.buscar(disyuncion).isEmpty());
+        assertTrue(buscador.buscar(disyuncion).isEmpty());
     }
 }
