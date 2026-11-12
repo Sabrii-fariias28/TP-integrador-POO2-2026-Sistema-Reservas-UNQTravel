@@ -42,8 +42,13 @@ class ConfirmadaTest {
     }
 
     @Test
-    void testQuitarItem_КогдаLaReservaEstaConfirmada_LanzaExcepcion() {
+    void testQuitarItem_LaReservaEstaConfirmada_LanzaExcepcion() {
         Exception excepcion = assertThrows(OperacionInvalida.class, () -> confirmada.quitarItem(reservaMock, itemMock));
-        assertEquals("No se pueden agregar servicios porque la reserva ya está confirmada", excepcion.getMessage());
+        assertEquals("No se pueden quitar servicios porque la reserva ya está confirmada", excepcion.getMessage());
+    }
+
+    @Test
+    void testRequiereNotificacionEmail_DevuelveTrue() {
+        assertTrue(confirmada.requiereNotificacionEmail());
     }
 }
