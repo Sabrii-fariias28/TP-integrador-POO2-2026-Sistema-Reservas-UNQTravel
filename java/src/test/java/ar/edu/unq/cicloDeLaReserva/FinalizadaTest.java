@@ -39,4 +39,14 @@ public class FinalizadaTest {
         Exception excepcion = assertThrows(OperacionInvalida.class, () -> finalizada.cancelarReserva(reservaMock));
         assertEquals("No se puede cancelar el viaje : El viaje ya se encuentra finalizado", excepcion.getMessage());
     }
+
+    @Test
+    void testRequiereNotificacionEmail_DevuelveTrue() {
+        assertTrue(finalizada.requiereNotificacionEmail());
+    }
+
+    @Test
+    void testRequiereVoucher_DevuelveTrue() {
+        assertTrue(finalizada.requiereVoucher());
+    }
 }
