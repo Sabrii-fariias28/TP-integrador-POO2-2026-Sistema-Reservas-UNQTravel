@@ -15,6 +15,7 @@ public class Reserva{
     private LocalDate fechaFin;
     private MetodoDePago metodoDePago;
     private NotificadorManager notificadorManager;
+    //private Traslado metodoTraslado  cuando lo tengamos
 
     public Reserva(int cantPersonas,  LocalDate fechaInicio, LocalDate fechaFin, MetodoDePago metodoDePago, NotificadorManager notificador) {
         this.servicios = new ArrayList<>();
