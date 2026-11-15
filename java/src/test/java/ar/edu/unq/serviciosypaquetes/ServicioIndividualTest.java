@@ -17,7 +17,7 @@ class ServicioIndividualTest {
     }
 
     @Test
-    void testPreciosConYSinDescuento() {
+    void testCalcularPrecioBaseYPrecioFinalConDescuento() {
         assertEquals(4000.0, servicio.getPrecioBase());
         // Descuento del 10%
         assertEquals(3600.0, servicio.precioFinal());
