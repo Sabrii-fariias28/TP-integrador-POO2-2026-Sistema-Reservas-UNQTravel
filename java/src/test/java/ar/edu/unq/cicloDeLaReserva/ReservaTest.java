@@ -35,9 +35,9 @@ class ReservaTest {
         item3 = mock(ItemCatalogo.class);
 
         // Aca pongo el mock para que devuelva true por defecto al consultar disponibilidad
-        when(item1.estaDisponibleEnRango(any(), any(), anyInt())).thenReturn(true);
-        when(item2.estaDisponibleEnRango(any(), any(), anyInt())).thenReturn(true);
-        when(item3.estaDisponibleEnRango(any(), any(), anyInt())).thenReturn(true);
+        when(item1.estaDisponible(any(), anyInt())).thenReturn(true);
+        when(item2.estaDisponible(any(), anyInt())).thenReturn(true);
+        when(item3.estaDisponible(any(), anyInt())).thenReturn(true);
     }
 
     @Test
@@ -62,7 +62,7 @@ class ReservaTest {
 
     @Test
     void unaReservaNoPermiteAgregarUnServicioSinDisponibilidad() {
-        when(item1.estaDisponibleEnRango(any(), any(), anyInt())).thenReturn(false);
+        when(item1.estaDisponible(any(), anyInt())).thenReturn(false);
         Exception excepcion = assertThrows(SinDisponibilidad.class, () -> reserva.agregarItem(item1));
 
         assertEquals("El servicio no se puede añadir, no tiene disponibilidad.", excepcion.getMessage());
@@ -71,8 +71,8 @@ class ReservaTest {
 
     @Test
     void unaReservaCalculaElPrecioTotalDeSusServicios() {
-        when(item1.precioFinal()).thenReturn(1000.0);
-        when(item2.precioFinal()).thenReturn(2000.0);
+        when(item1.precioFinal(0)).thenReturn(1000.0);
+        when(item2.precioFinal(0)).thenReturn(2000.0);
 
         reserva.agregarItem(item1);
         reserva.agregarItem(item2);
@@ -132,7 +132,7 @@ class ReservaTest {
 
     @Test
     void testNoPermiteAgregarItemSiNoTieneDisponibilidadYFalla() {
-        when(item2.estaDisponibleEnRango(any(), any(), anyInt())).thenReturn(false);
+        when(item2.estaDisponible(any(), anyInt())).thenReturn(false);
         Exception excepcion = assertThrows(SinDisponibilidad.class, () -> reserva.agregarItem(item2));
 
         reserva.agregarItem(item1);

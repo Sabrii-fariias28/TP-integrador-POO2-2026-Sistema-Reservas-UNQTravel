@@ -28,7 +28,8 @@ public class Reserva{
     }
 
     public void agregarItem(ItemCatalogo item){
-        if(item.estaDisponibleEnRango(fechaInicio,fechaFin,cantPersonas)){
+        //if(item.estaDisponibleEnRango(fechaInicio,fechaFin,cantPersonas)){ ESTABA MAL EL METODO
+        if(item.estaDisponible(fechaInicio,cantPersonas)){
             this.servicios.add(item);
         } else{
             throw new SinDisponibilidad("El servicio no se puede añadir, no tiene disponibilidad.");
@@ -75,7 +76,7 @@ public class Reserva{
 
     public double calcularPrecioTotal(){
         return servicios.stream()
-                .mapToDouble(ItemCatalogo::precioFinal)
+                .mapToDouble(item -> item.precioFinal(0))
                 .sum();
     }
 
