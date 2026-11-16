@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+//puse 0,1 de pruebaa era porque faltaba ese parametro
 public class TestData {
     // Disponibilidad para los próximos días (Noviembre / Diciembre 2026)
     static Disponibilidad dispManana = new Disponibilidad(LocalDate.of(2026, 11, 15), 10);
@@ -20,32 +21,32 @@ public class TestData {
     // --- 1. CREACIÓN DE SERVICIOS INDIVIDUALES (con sus cupos reales) ---
     static ServicioIndividual hotelBariloche = new ServicioIndividual(
             "S01", "Hotel Llao Llao", cuposMontana,
-            "Hotel 5 estrellas en la montaña", "BookingUNQ", "Alojamiento", 150000.0
+            "Hotel 5 estrellas en la montaña", "BookingUNQ", "Alojamiento", 150000.0,0.1
     );
 
     static ServicioIndividual excursionCatedral = new ServicioIndividual(
             "S02", "Ascenso al Cerro Catedral", cuposMontana,
-            "Excursión de ski y trekking", "AndesExpediciones", "Aventura", 40000.0
+            "Excursión de ski y trekking", "AndesExpediciones", "Aventura", 40000.0,0.1
     );
 
     static ServicioIndividual vueloBuenosAires = new ServicioIndividual(
             "S03", "Vuelo Ida y Vuelta a BRC", cuposGeneral,
-            "Vuelo directo cabotaje", "FlyUNQ", "Transporte", 80000.0
+            "Vuelo directo cabotaje", "FlyUNQ", "Transporte", 80000.0, 0.1
     );
 
     static ServicioIndividual excursionBuceo = new ServicioIndividual(
             "S04", "Buceo en Mar del Plata", cuposPlaya,
-            "Bautismo submarino con equipo", "CostaMar", "Playa", 35000.0
+            "Bautismo submarino con equipo", "CostaMar", "Playa", 35000.0,0.1
     );
 
     static ServicioIndividual hostelMdP = new ServicioIndividual(
             "S05", "Hostel La Costa", cuposPlaya,
-            "Alojamiento mochilero frente al mar", "HostelWorld", "Alojamiento", 25000.0
+            "Alojamiento mochilero frente al mar", "HostelWorld", "Alojamiento", 25000.0,0.1
     );
 
     static ServicioIndividual transferAeropuerto = new ServicioIndividual(
             "S06", "Transfer Privado BRC", cuposGeneral,
-            "Traslado aeropuerto - hotel", "TransfersUNQ", "Transporte", 15000.0
+            "Traslado aeropuerto - hotel", "TransfersUNQ", "Transporte", 15000.0,0.1
     );
 
 

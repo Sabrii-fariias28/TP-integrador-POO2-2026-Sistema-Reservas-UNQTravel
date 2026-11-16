@@ -3,7 +3,7 @@ package ar.edu.unq.metodoDePago;
 public abstract class MetodoDePago {
 
     public void realizarPago(double cantidad){
-        //Aca vamos a tener el flujo de pago completo con los 4 pasos. Acordarme de preguntar el tipo, era float o double¿
+        //Aca vamos a tener el flujo de pago completo con los 4 pasos.
         //Si algun paso no se puede hacer, se deberia de cortar el flujo
         this.validarDatos();
         this.reservarFondos();
@@ -14,7 +14,11 @@ public abstract class MetodoDePago {
     public abstract void validarDatos();
     public abstract void reservarFondos();
     public abstract void ejecutarTransaccion(double cantidad);
-    public abstract void notificarResultado();
+
+    //El enunciado dice que este paso, podemos no hacerlo. Es opcional...
+    public void notificarResultado(){
+        System.out.println("Registro por defecto del codigo de transacción.");
+    }
 
     public abstract void realizarReembolso(double cantidad);
 
