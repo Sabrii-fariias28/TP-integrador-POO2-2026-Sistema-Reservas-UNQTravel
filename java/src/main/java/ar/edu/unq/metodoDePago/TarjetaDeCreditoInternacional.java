@@ -6,15 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TarjetaDeCreditoInternacional extends MetodoDePago{
-    private int numTarjeta;
+    private String numTarjeta;
     private String cvv;
     private YearMonth fechaVen; //Solo tiene  mes y año y no hace falta especificar un dia...
     private ApiTarjetaDeCredito apiTarjeta;
-    private List<VoucherDigital> vouchers;
 
-    public TarjetaDeCreditoInternacional(ApiTarjetaDeCredito apiTarjeta) {
+    public TarjetaDeCreditoInternacional(ApiTarjetaDeCredito apiTarjeta, String numTarjeta, String cvv, YearMonth fechaVen) {
         this.apiTarjeta = apiTarjeta;
-        this.vouchers = new ArrayList<>();
+        this.numTarjeta = numTarjeta;
+        this.cvv = cvv;
+        this.fechaVen = fechaVen;
     }
 
     @Override
@@ -30,22 +31,18 @@ public class TarjetaDeCreditoInternacional extends MetodoDePago{
 
     @Override
     public void reservarFondos() {
-
+        this.apiTarjeta.preAutorizarBancoEmisor();
     }
 
     @Override
     public void ejecutarTransaccion(double cantidad) {
-
+        this.apiTarjeta.transferenciaInmediata(cantidad);
     }
 
-    @Override
-    public void notificarResultado() {
-
-    }
 
     @Override
-    public void realizarReembolso(double cantidad) {
-
+    public void realizarReembolso(double monto) {
+        this.apiTarjeta.reembolsarMonto(monto);
     }
 
     private void validarVencimiento(){
@@ -55,13 +52,13 @@ public class TarjetaDeCreditoInternacional extends MetodoDePago{
     }
 
     private void validarCVV(){
-        if (esValidoCvv()) {
+        if (!esValidoCvv()) {
             throw new RuntimeException("Error: El código CVV es inválido.");
         }
     }
 
     private void validarNumeroTarjeta(){
-        if (this.numTarjeta <= 0) {
+        if (esNumValidoDeTarjeta()) {
             throw new RuntimeException("Error: El número de tarjeta es inválido.");
         }
     }
@@ -72,5 +69,9 @@ public class TarjetaDeCreditoInternacional extends MetodoDePago{
 
     private boolean esUnaTarjetaValida(){
         return this.apiTarjeta.verificarDatos(this.numTarjeta, this.cvv, this.fechaVen);
+    }
+
+    private boolean esNumValidoDeTarjeta(){
+        return this.numTarjeta == null || this.numTarjeta.isEmpty();
     }
 }

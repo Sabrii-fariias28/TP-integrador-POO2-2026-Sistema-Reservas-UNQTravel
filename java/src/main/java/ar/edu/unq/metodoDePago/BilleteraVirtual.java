@@ -18,10 +18,6 @@ public class BilleteraVirtual extends MetodoDePago{
 
     }
 
-    @Override
-    public void notificarResultado() {
-
-    }
 
     @Override
     public void realizarReembolso(double cantidad) {
