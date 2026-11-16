@@ -2,7 +2,6 @@ package ar.edu.unq.cicloDeLaReserva;
 import ar.edu.unq.serviciosypaquetes.*;
 import ar.edu.unq.metodoDePago.MetodoDePago;
 import ar.edu.unq.notificadores.NotificadorManager;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +78,7 @@ public class Reserva{
 
     public double calcularPrecioTotal(){
         return servicios.stream()
-                .mapToDouble(item -> item.precioFinal(0))
+                .mapToDouble(ItemCatalogo::precioFinal)
                 .sum();
     }
 

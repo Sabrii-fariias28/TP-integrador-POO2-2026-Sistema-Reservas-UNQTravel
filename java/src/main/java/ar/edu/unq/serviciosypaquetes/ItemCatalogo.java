@@ -40,7 +40,7 @@ public abstract class ItemCatalogo {
         return this.cupos;
     }
 
-    public String getProveedor(){ return this.proveedor}
+    public String getProveedor(){ return this.proveedor;}
 
     public boolean hayCupos(int cant){
         return this.cupos.stream().anyMatch(cupo -> cupo.hayLugar(cant));

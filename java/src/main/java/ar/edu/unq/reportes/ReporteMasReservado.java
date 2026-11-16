@@ -3,13 +3,14 @@ package ar.edu.unq.reportes;
 import ar.edu.unq.Catalogo;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class ReporteMasReservado extends Reporte {
-    private List<DetalleServicioMasVendido> detalles;
+    private List<DetalleServicioVendido> detalles;
     private LocalDate periodoInicio;
     private LocalDate periodoFin;
 
-    public ReporteMasReservado(Catalogo catalogo, List<DetalleServicioMasVendido> detalles, LocalDate pInicio, LocalDate pFin) {
+    public ReporteMasReservado(Catalogo catalogo, List<DetalleServicioVendido> detalles, LocalDate pInicio, LocalDate pFin) {
         super(catalogo);
         this.periodoInicio = pInicio;
         this.periodoFin = pFin;
@@ -18,10 +19,10 @@ public class ReporteMasReservado extends Reporte {
 
     @Override
     public void aceptarVisita(VisitorFormato v) {
-        super.aceptarVisita(v);
+        v.visitar(this);
     }
 
-    public List<DetalleServicioMasVendido> detallesNose(){
+    public List<DetalleServicioVendido> detalles(){
         return this.detalles;
     }
 }
