@@ -14,7 +14,11 @@ public abstract class MetodoDePago {
     public abstract void validarDatos();
     public abstract void reservarFondos();
     public abstract void ejecutarTransaccion(double cantidad);
-    public abstract void notificarResultado();
+
+    //El enunciado dice que este paso, podemos no hacerlo. Es opcional...
+    public void notificarResultado(){
+        System.out.println("Registro por defecto del codigo de transacción.");
+    }
 
     public abstract void realizarReembolso(double cantidad);
 
