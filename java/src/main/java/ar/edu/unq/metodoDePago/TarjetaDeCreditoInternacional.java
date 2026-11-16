@@ -23,10 +23,7 @@ public class TarjetaDeCreditoInternacional extends MetodoDePago{
         this.validarNumeroTarjeta();
         this.validarCVV();
         this.validarVencimiento();
-
-        if (!esUnaTarjetaValida()) {
-            throw new RuntimeException("Error: La API de la tajeta de credito internacional rechazó la tarjeta.");
-        }
+        this.apruebaLaApiLaTarjeta();
     }
 
     @Override
@@ -73,5 +70,11 @@ public class TarjetaDeCreditoInternacional extends MetodoDePago{
 
     private boolean esNumValidoDeTarjeta(){
         return this.numTarjeta == null || this.numTarjeta.isEmpty();
+    }
+
+    private void apruebaLaApiLaTarjeta(){
+        if (!esUnaTarjetaValida()) {
+            throw new RuntimeException("Error: La API de la tajeta de credito internacional rechazó la tarjeta.");
+        }
     }
 }
