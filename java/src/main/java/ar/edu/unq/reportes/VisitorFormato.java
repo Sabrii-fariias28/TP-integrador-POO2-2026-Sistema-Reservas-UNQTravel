@@ -2,15 +2,9 @@ package ar.edu.unq.reportes;
 
 public interface VisitorFormato {
 
-    public void visitar(ReporteExposicion r){
-        //FALTA AGREGAR EL CODIGO
-    }
+    void visitar(ReporteExposicion r);
 
-    public void visitar(ReporteOcupacion r){
-        //FALTA AGREGAR EL CODIGO
-    }
+    void visitar(ReporteOcupacion r);
 
-    public void visitar(ReporteMasReservado r){
-        //FALTA AGREGAR EL CODIGO
-    }
+    void visitar(ReporteMasReservado r);
 }
