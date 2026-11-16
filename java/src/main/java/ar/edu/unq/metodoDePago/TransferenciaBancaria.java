@@ -6,21 +6,21 @@ public class TransferenciaBancaria extends MetodoDePago{
    private ApiTransferenciaBancaria api;
 
     public TransferenciaBancaria(String cbu, String alias, ApiTransferenciaBancaria api){
-      this.cbu = cbu;
-      this.alias = alias;
-      this.api = api;
+       this.cbu = cbu;
+       this.alias = alias;
+       this.api = api;
     }
 
     @Override
     public void validarDatos() {
-      this.validarCbu();
-      this.validarAlias();
-      this.validarTransferenciaPorApi();
+       this.validarCbu();
+       this.validarAlias();
+       this.validarTransferenciaPorApi();
     }
 
     @Override
     public void reservarFondos() {
-      this.api.transferenciaDirecta();
+       this.api.transferenciaDirecta();
     }
 
     @Override
@@ -34,14 +34,14 @@ public class TransferenciaBancaria extends MetodoDePago{
     }
 
     public void validarCbu(){
-     if(!esCbuValido()){
-       throw new RuntimeException("Error: No es un CBU valido.");
-     }
+      if(!esCbuValido()){
+        throw new RuntimeException("Error: No es un CBU valido.");
+      }
     }
 
     public void validarAlias(){
-      if(this.alias == null){
-         throw new RuntimeException("Error: El alias esta vacio.");
+      if(this.alias == null && this.alias.isEmpty()){
+         throw new RuntimeException("Error: El alias es invalido.");
       }
     }
 
