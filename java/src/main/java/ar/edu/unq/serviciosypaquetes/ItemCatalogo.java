@@ -108,4 +108,8 @@ public abstract class ItemCatalogo {
         return fechaInicio.datesUntil(fechaFin.plusDays(1))
                 .allMatch(fecha -> this.estaDisponible(fecha, cantPersonas));
     }
+
+    abstract public boolean contieneNombre(String nombre);
+
+    abstract public boolean contieneCategoria(String categoria);
 }
