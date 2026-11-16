@@ -16,7 +16,7 @@ class ItemCatalogoTest {
         dia1 = LocalDate.of(2026, 12, 1);
         dia2 = LocalDate.of(2026, 12, 2);
 
-        servicio = new ServicioIndividual("V1", "Vuelo Bariloche", new ArrayList<>(), "Desc", "Aero", "Vuelo", 4000.0);
+        servicio = new ServicioIndividual("V1", "Vuelo Bariloche", new ArrayList<>(), "Desc", "Aero", "Vuelo", 4000.0, 10.0);
         servicio.agregarFecha(dia1, 10);
         servicio.agregarFecha(dia2, 5);
     }
@@ -53,7 +53,7 @@ class ItemCatalogoTest {
         assertEquals("Desc", servicio.getDescripcion());
         assertNotNull(servicio.getCupos());
         assertEquals(4000.0, servicio.getPrecioBase());
-        assertEquals(3600.0, servicio.precioFinal(10.0));
+        assertEquals(3600.0, servicio.precioFinal());
     }
 
     @Test
@@ -99,5 +99,21 @@ class ItemCatalogoTest {
     void testVerificarSiHayCupos(){
         assertTrue(servicio.hayCupos(10));
         assertFalse(servicio.hayCupos(15));
+    }
+
+    @Test
+    void testEstaDisponibleEnRangoDevuelveTrueCuandoHayCupoEnTodoElRango() {
+        // El servicio tiene cupo 10 en dia1 (01/12) y cupo 5 en dia2 (02/12) hay espacio para dos personas...
+        boolean resultado = servicio.estaDisponibleEnRango(dia1, dia2, 2);
+
+        assertTrue(resultado);
+    }
+
+    @Test
+    void testEstaDisponibleEnRangoDevuelveFalseCuandoFallaAlMenosUnDia() {
+        // En dia1 hay cupo para 10, pero pedimos 12...
+        boolean resultado = servicio.estaDisponibleEnRango(dia1, dia2, 12);
+
+        assertFalse(resultado);
     }
 }

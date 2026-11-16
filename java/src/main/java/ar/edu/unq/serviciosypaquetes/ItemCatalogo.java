@@ -34,7 +34,7 @@ public abstract class ItemCatalogo {
 
     abstract public double getPrecioBase();
 
-    abstract public double precioFinal(double descuento);
+    abstract public double precioFinal();
 
     public List<Disponibilidad> getCupos(){
         return this.cupos;
@@ -102,6 +102,11 @@ public abstract class ItemCatalogo {
 
     public void agregarFecha(LocalDate fecha, int capacidad) {
         cupos.add(new Disponibilidad(fecha, capacidad));
+    }
+
+    public boolean estaDisponibleEnRango(LocalDate fechaInicio, LocalDate fechaFin, int cantPersonas) {
+        return fechaInicio.datesUntil(fechaFin.plusDays(1))
+                .allMatch(fecha -> this.estaDisponible(fecha, cantPersonas));
     }
 
     abstract public boolean contieneNombre(String nombre);

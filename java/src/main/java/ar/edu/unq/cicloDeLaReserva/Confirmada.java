@@ -21,7 +21,7 @@ public class Confirmada extends EstadoReserva{
 
     @Override
     public void quitarItem(Reserva reserva, ItemCatalogo item) {
-        throw new OperacionInvalida("No se pueden agregar servicios porque la reserva ya está confirmada");
+        throw new OperacionInvalida("No se pueden quitar servicios porque la reserva ya está confirmada");
     }
 
     @Override

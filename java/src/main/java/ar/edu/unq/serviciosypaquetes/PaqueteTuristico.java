@@ -16,14 +16,14 @@ public class PaqueteTuristico extends ItemCatalogo {
     public double getPrecioBase(){
         double precioBase = 0;
         for (ItemCatalogo i : contenido){
-            precioBase += i.getPrecioBase();
+            precioBase += i.precioFinal();
         }
-        return precioBase - (precioBase * (this.descuentoPaquete / 100));
+        return precioBase;
     }
 
     @Override
-    public double precioFinal(double descuento) {
-        return this.getPrecioBase() - (this.getPrecioBase() * (descuento / 100));
+    public double precioFinal() {
+        return this.getPrecioBase() - (this.getPrecioBase() * (descuentoPaquete / 100));
     }
 
     @Override

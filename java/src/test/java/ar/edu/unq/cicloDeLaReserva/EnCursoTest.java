@@ -27,7 +27,7 @@ public class EnCursoTest {
     void testCancelarReserva_ReembolsaCostosYCambiaACancelada() {
         enCurso.cancelarReserva(reservaMock);
 
-        verify(reservaMock).reembolsarCostosTasas();
+        verify(reservaMock).reembolsarServicios();
         verify(reservaMock).cambiarEstado(any(Cancelada.class));
     }
 
@@ -35,5 +35,10 @@ public class EnCursoTest {
     void testConfirmarViaje_EstandoEnCurso_LanzaExcepcion() {
         Exception excepcion = assertThrows(OperacionInvalida.class, () -> enCurso.confirmarViaje(reservaMock));
         assertEquals("No se puede confirmar el viaje", excepcion.getMessage());
+    }
+
+    @Test
+    void testRequiereNotificacionEmail_DevuelveTrue() {
+        assertTrue(enCurso.requiereNotificacionEmail());
     }
 }

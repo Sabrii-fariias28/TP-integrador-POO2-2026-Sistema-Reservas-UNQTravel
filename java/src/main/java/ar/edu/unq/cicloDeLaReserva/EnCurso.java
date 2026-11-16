@@ -8,7 +8,7 @@ public class EnCurso extends EstadoReserva{
 
     @Override
     public void cancelarReserva(Reserva reserva) {
-        reserva.reembolsarCostosTasas();// solo se reembolsa el costo de los servicios no disfrutados pero no de las tasas administrativas.
+        reserva.reembolsarServicios();// solo se reembolsa el costo de los servicios no disfrutados pero no de las tasas administrativas.
         reserva.cambiarEstado(new Cancelada());
     }
 
