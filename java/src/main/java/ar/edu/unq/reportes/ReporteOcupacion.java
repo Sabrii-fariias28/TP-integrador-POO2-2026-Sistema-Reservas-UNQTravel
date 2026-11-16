@@ -5,11 +5,11 @@ import ar.edu.unq.Catalogo;
 import java.time.LocalDate;
 
 public class ReporteOcupacion extends Reporte{
-    DatosOcupacion detalles;
+    DetalleOcupacion detalles;
     private LocalDate periodoInicio;
     private LocalDate periodoFin;
 
-    public ReporteOcupacion(Catalogo catalogo, DatosOcupacion detalles, LocalDate pInicio, LocalDate pFin){
+    public ReporteOcupacion(Catalogo catalogo, DetalleOcupacion detalles, LocalDate pInicio, LocalDate pFin){
         super(catalogo);
         this.periodoInicio = pInicio;
         this.periodoFin = pFin;
@@ -18,10 +18,7 @@ public class ReporteOcupacion extends Reporte{
 
     @Override
     public void aceptarVisita(VisitorFormato v){
-        super.aceptarVisita(v);
+        v.visitar(this);
     }
 
-    public List<detalles> datosAReportar(){
-        return this.detalles;
-    }
 }
