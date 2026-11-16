@@ -4,6 +4,11 @@ public class BilleteraVirtual extends MetodoDePago{
     private double saldo;
     private ApiBilleteraVirtual api;
 
+    public BilleteraVirtual(double saldo, ApiBilleteraVirtual api){
+        this.saldo = saldo;
+        this.api = api;
+    }
+
     @Override
     public void validarDatos() {
         this.validarSaldoEnApi();
