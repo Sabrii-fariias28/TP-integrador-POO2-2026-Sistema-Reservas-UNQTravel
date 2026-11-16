@@ -20,30 +20,29 @@ public class TransferenciaBancaria extends MetodoDePago{
 
     @Override
     public void reservarFondos() {
-
+      this.api.transferenciaDirecta();
     }
 
     @Override
     public void ejecutarTransaccion(double cantidad) {
-
-    }
-
-    @Override
-    public void notificarResultado() {
-
+       this.api.transferenciaInmediata(cantidad);
     }
 
     @Override
     public void realizarReembolso(double cantidad) {
-
+       this.api.reembolsarMonto(cantidad);
     }
 
     public void validarCbu(){
-
+     if(!esCbuValido()){
+       throw new RuntimeException("Error: No es un CBU valido.");
+     }
     }
 
     public void validarAlias(){
-
+      if(this.alias == null){
+         throw new RuntimeException("Error: El alias esta vacio.");
+      }
     }
 
     public void validarTransferenciaPorApi(){
@@ -54,5 +53,9 @@ public class TransferenciaBancaria extends MetodoDePago{
 
     public boolean esTransferenciaValida(){
        return this.api.validarTransferencia(this.cbu,this.alias);
+    }
+
+    public boolean esCbuValido(){
+       return this.cbu != null && cbu.matches("\\d{22}"); // un cbu valido es de 22 de solo numeros.
     }
 }
