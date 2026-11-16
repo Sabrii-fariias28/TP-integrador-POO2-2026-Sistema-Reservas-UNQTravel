@@ -27,7 +27,7 @@ public class BilleteraVirtual extends MetodoDePago{
 
     @Override
     public void realizarReembolso(double cantidad) {
-
+        this.api.reembolsarMonto(cantidad);
     }
 
     public void validarSaldoEnApi(){
