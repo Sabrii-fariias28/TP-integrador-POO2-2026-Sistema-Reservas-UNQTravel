@@ -24,7 +24,6 @@ public class BilleteraVirtual extends MetodoDePago{
         this.api.acreditacionEnTiempoRealAlVendedor(cantidad);
     }
 
-
     @Override
     public void realizarReembolso(double cantidad) {
         this.api.reembolsarMonto(cantidad);
