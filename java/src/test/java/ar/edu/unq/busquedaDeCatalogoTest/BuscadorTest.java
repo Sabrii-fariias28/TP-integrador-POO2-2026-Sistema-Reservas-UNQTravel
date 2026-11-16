@@ -11,7 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BuscadorTest {
-
+//aca tambien puse el 0.1 de pruebaaaa no me maten
     private Buscador buscador;
     private Catalogo catalogo;
     private CriterioPorPrecioMax criterioPrecioMax;
@@ -26,9 +26,9 @@ public class BuscadorTest {
         cupos = new ArrayList<>();
         criterioPrecioMax = new CriterioPorPrecioMax(6500.0);
         hotel = new ServicioIndividual("9","Hotel Central",cupos,"Hospedacion en el hotel central",
-                "Ricota", "Hotel",5000.0);
+                "Ricota", "Hotel",5000.0, 0.1);
         excursion = new ServicioIndividual("5","Excursion a la selva",cupos,"Veni a conocer la Selva",
-                "Hoyoverse", "Excursion",7500.0);
+                "Hoyoverse", "Excursion",7500.0, 0.1);
         catalogo.agregarItem(hotel);
         catalogo.agregarItem(excursion);
     }

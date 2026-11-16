@@ -10,6 +10,6 @@ public class CriterioPorPrecioMax implements Criterio{
 
     @Override
     public boolean cumpleCriterio(ItemCatalogo item){
-        return item.precioFinal(0) <= precioMax;
+        return item.precioFinal() <= precioMax;
     }
 }

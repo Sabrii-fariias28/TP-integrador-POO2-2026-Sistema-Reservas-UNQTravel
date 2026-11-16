@@ -40,7 +40,7 @@ public class TransferenciaBancaria extends MetodoDePago{
     }
 
     public void validarAlias(){
-      if(this.alias == null && this.alias.isEmpty()){
+      if(this.alias == null || this.alias.isEmpty()){
          throw new RuntimeException("Error: El alias es invalido.");
       }
     }
