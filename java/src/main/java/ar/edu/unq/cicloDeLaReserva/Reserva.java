@@ -70,9 +70,6 @@ public class Reserva{
     public void reembolsarServicios(){
         metodoDePago.realizarReembolso(calcularPrecioServicios());
     }
-    public void reembolsarCostosTasas(){
-        metodoDePago.realizarReembolso(tasasAdministracion());
-    }
 
     public void realizarPago(){
        metodoDePago.realizarPago(calcularPrecioTotal());
@@ -87,7 +84,6 @@ public class Reserva{
                 .mapToDouble(ItemCatalogo::precioFinal) // Ajustar según tu firma de precioFinal
                 .sum();
     }
-
 
     public double calcularCostoTraslado(){
         if (this.traslado != null) {
