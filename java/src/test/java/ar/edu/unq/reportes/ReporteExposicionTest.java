@@ -31,7 +31,7 @@ class ReporteExposicionTest {
         catalogo.agregarItem(item2);
         catalogo.agregarItem(item3);
 
-        reporte = new ReporteExposicion(catalogo, new ArrayList<>());
+        reporte = new ReporteExposicion(catalogo);
     }
 
     @Test
@@ -63,7 +63,7 @@ class ReporteExposicionTest {
     @Test
     void testReporteConCatalogoVacioDevuelveDetallesVacios() {
         Catalogo catalogoVacio = new Catalogo(new ArrayList<>());
-        ReporteExposicion reporteVacio = new ReporteExposicion(catalogoVacio, new ArrayList<>());
+        ReporteExposicion reporteVacio = new ReporteExposicion(catalogoVacio);
 
         List<DetalleExposicion> detalles = reporteVacio.getDetalles();
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ReporteExposicion extends Reporte{
 
-    public ReporteExposicion(Catalogo catalogo, List<DetalleExposicion> detalles){
+    public ReporteExposicion(Catalogo catalogo){
         super(catalogo);
     }
 
