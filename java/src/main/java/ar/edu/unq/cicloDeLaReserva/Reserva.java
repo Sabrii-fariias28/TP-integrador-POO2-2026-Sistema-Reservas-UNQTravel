@@ -18,7 +18,7 @@ public class Reserva{
     private NotificadorManager notificadorManager;
     private MetodoTraslado traslado;
 
-    public Reserva(int cantPersonas,  LocalDate fechaInicio, LocalDate fechaFin, MetodoDePago metodoDePago, NotificadorManager notificador) {
+    public Reserva(int cantPersonas,  LocalDate fechaInicio, LocalDate fechaFin, MetodoDePago metodoDePago, NotificadorManager notificador, MetodoTraslado traslado) {
         this.servicios = new ArrayList<>();
         this.estado = new Pendiente();
         this.cantPersonas = cantPersonas;
@@ -26,6 +26,7 @@ public class Reserva{
         this.fechaFin = fechaFin;
         this.metodoDePago = metodoDePago;
         this.notificadorManager = notificador;
+        this.traslado = traslado;
     }
 
     public void agregarItem(ItemCatalogo item){
