@@ -35,4 +35,8 @@ public abstract class EstadoReserva {
     public boolean requiereVoucher(){ return false;}
 
     public boolean requiereFidelizacion(){ return false;}
+
+    public boolean estaFinalizada() {
+        return false;
+    }
 }
