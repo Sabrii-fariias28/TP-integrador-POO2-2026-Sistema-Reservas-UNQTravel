@@ -37,9 +37,9 @@ class ReservaTest {
         item3 = mock(ItemCatalogo.class);
 
         // Aca pongo el mock para que devuelva true por defecto al consultar disponibilidad
-        when(item1.estaDisponible(any(), anyInt())).thenReturn(true);
-        when(item2.estaDisponible(any(), anyInt())).thenReturn(true);
-        when(item3.estaDisponible(any(), anyInt())).thenReturn(true);
+        when(item1.estaDisponibleEnRango(any(), any(), anyInt())).thenReturn(true);
+        when(item2.estaDisponibleEnRango(any(),any(), anyInt())).thenReturn(true);
+        when(item3.estaDisponibleEnRango(any(),any(), anyInt())).thenReturn(true);
     }
 
     @Test
@@ -64,8 +64,9 @@ class ReservaTest {
 
     @Test
     void unaReservaNoPermiteAgregarUnServicioSinDisponibilidad() {
-        when(item1.estaDisponible(any(), anyInt())).thenReturn(false);
-        Exception excepcion = assertThrows(SinDisponibilidad.class, () -> reserva.agregarItem(item1));
+        ItemCatalogo itemSinDisponibilidad = mock(ItemCatalogo.class);
+        when(itemSinDisponibilidad.estaDisponibleEnRango(any(), any(), anyInt())).thenReturn(false);
+        Exception excepcion = assertThrows(SinDisponibilidad.class, () -> reserva.agregarItem(itemSinDisponibilidad));
 
         assertEquals("El servicio no se puede añadir, no tiene disponibilidad.", excepcion.getMessage());
         assertTrue(reserva.getServicios().isEmpty());
@@ -133,18 +134,6 @@ class ReservaTest {
     }
 
     @Test
-    void testNoPermiteAgregarItemSiNoTieneDisponibilidadYFalla() {
-        when(item2.estaDisponible(any(), anyInt())).thenReturn(false);
-        Exception excepcion = assertThrows(SinDisponibilidad.class, () -> reserva.agregarItem(item2));
-
-        reserva.agregarItem(item1);
-
-
-        assertEquals("El servicio no se puede añadir, no tiene disponibilidad.", excepcion.getMessage());
-        assertEquals(1, reserva.getServicios().size());
-    }
-
-    @Test
     void unaReservaRealizaElPagoTotal() {
         when(item1.precioFinal()).thenReturn(1500.0);
 
@@ -162,14 +151,6 @@ class ReservaTest {
         reserva.reembolsarTotalCostos();
         //El precio total es de 2000 de los servicios y 5000 de las tasas = 7000
         verify(metodoPagoMock).realizarReembolso(7000.0);
-    }
-
-    @Test
-    void unaReservaRealizaElReembolsoDeTasasAdministrativas() {
-        reserva.reembolsarCostosTasas();
-
-        // Verifica que reembolsa el monto fijo de tasas (5000.0)
-        verify(metodoPagoMock).realizarReembolso(5000.0);
     }
 
     @Test
@@ -215,6 +196,22 @@ class ReservaTest {
 
         assertEquals(2500.0, reserva.calcularCostoTraslado(), 0.001);
         assertEquals(12500.0, reserva.calcularPrecioTotal(), 0.001);
+    }
+
+    @Test
+    void unaReservaRealizaElReembolsoDeServicios() {
+        when(item1.precioFinal()).thenReturn(3000.0);
+
+        reserva.agregarItem(item1);
+        reserva.reembolsarServicios();
+
+        // Verifica que se reembolse únicamente el precio de los servicios (sin tasas ni traslados)
+        verify(metodoPagoMock).realizarReembolso(3000.0);
+    }
+
+    @Test
+    void unaReservaConsultaSiEstaFinalizada() {
+        assertFalse(reserva.estaFinalizada());
     }
 
 }
