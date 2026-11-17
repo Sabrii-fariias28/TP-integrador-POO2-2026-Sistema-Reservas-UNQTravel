@@ -20,6 +20,7 @@ class ReservaTest {
     private LocalDate fechaFin;
     private MetodoDePago metodoPagoMock;
     private NotificadorManager notificadorManager;
+    private MetodoTraslado traslado;
     private ItemCatalogo item1;
     private ItemCatalogo item2;
     private ItemCatalogo item3;
@@ -30,7 +31,7 @@ class ReservaTest {
         fechaFin = LocalDate.of(2026, 12, 15);
         notificadorManager = mock(NotificadorManager.class);
         metodoPagoMock = mock(MetodoDePago.class);
-        reserva = new Reserva(2, fechaInicio, fechaFin, metodoPagoMock, notificadorManager);
+        reserva = new Reserva(2, fechaInicio, fechaFin, metodoPagoMock, notificadorManager, traslado);
         item1 = mock(ItemCatalogo.class);
         item2 = mock(ItemCatalogo.class);
         item3 = mock(ItemCatalogo.class);
@@ -72,8 +73,8 @@ class ReservaTest {
 
     @Test
     void unaReservaCalculaElPrecioTotalDeSusServicios() {
-        when(item1.precioFinal(0)).thenReturn(1000.0);
-        when(item2.precioFinal(0)).thenReturn(2000.0);
+        when(item1.precioFinal()).thenReturn(1000.0);
+        when(item2.precioFinal()).thenReturn(2000.0);
 
         reserva.agregarItem(item1);
         reserva.agregarItem(item2);
