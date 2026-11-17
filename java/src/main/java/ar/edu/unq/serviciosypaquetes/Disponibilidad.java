@@ -45,4 +45,12 @@ public class Disponibilidad {
     public int cuposDisponibles(){
         return this.capacidadMaxima - this.reservasConfirmadas;
     }
+
+    public int getCapacidadMaxima() {
+        return this.capacidadMaxima;
+    }
+
+    public int getReservasConfirmadas() {
+        return this.reservasConfirmadas;
+    }
 }

@@ -44,11 +44,20 @@ public class ServicioIndividual extends ItemCatalogo{
 
     @Override
     public boolean contieneNombre(String nombre){
-        return this.getNombre().toLowerCase().equals(nombre);
+        return this.getNombre().toLowerCase().contains(nombre.toLowerCase());
     }
 
     @Override
     public boolean contieneCategoria(String categoria){
         return this.categoria.toLowerCase().equalsIgnoreCase(categoria);
+    }
+
+    public String getCategoria() {
+        return this.categoria;
+    }
+
+    @Override
+    public List<ServicioIndividual> obtenerServiciosIndividuales() {
+        return List.of(this);
     }
 }

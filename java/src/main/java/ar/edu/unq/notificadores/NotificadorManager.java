@@ -2,7 +2,7 @@ package ar.edu.unq.notificadores;
 import ar.edu.unq.cicloDeLaReserva.EstadoReserva;
 import java.util.ArrayList;
 
-public class NotificadorManager {
+public class    NotificadorManager {
     private ArrayList<Notificador> notificadores;
 
     public NotificadorManager(ArrayList<Notificador> n){

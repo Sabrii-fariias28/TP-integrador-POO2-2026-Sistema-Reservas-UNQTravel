@@ -96,6 +96,9 @@ public class Reserva{
         }
     }
 
+    public boolean estaFinalizada() {
+        return estado.estaFinalizada();
+    }
 
     //REVISAR #PREGUNTAR #LOdijoDemi
     private double tasasAdministracion(){
