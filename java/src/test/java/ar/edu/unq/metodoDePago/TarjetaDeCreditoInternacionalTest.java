@@ -43,7 +43,6 @@ public class TarjetaDeCreditoInternacionalTest {
 
     @Test
     void testValidarDatos_FallaSiCvvEsInvalido() {
-        // CVV con menos de 3 dígitos o letras
         TarjetaDeCreditoInternacional tarjetaCvvMalo = new TarjetaDeCreditoInternacional(apiMock, numValido, "12", fechaValida);
 
         RuntimeException ex = assertThrows(RuntimeException.class, tarjetaCvvMalo::validarDatos);

@@ -3,7 +3,6 @@ package ar.edu.unq.metodoDePago;
 public abstract class MetodoDePago {
 
     public void realizarPago(double cantidad){
-        //Aca vamos a tener el flujo de pago completo con los 4 pasos.
         //Si algun paso no se puede hacer, se deberia de cortar el flujo
         this.validarDatos();
         this.reservarFondos();

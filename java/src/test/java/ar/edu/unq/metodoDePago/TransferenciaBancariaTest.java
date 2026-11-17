@@ -21,7 +21,6 @@ public class TransferenciaBancariaTest {
 
     @Test
     void testValidarDatos_FallaSiCbuInvalido() {
-        // este test necesita un cbu invalido
         TransferenciaBancaria transferenciaInvalida = new TransferenciaBancaria("1A3", "mi.alias", apiMock);
 
         RuntimeException ex = assertThrows(RuntimeException.class, transferenciaInvalida::validarDatos);
