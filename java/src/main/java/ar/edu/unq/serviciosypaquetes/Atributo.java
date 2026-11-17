@@ -15,5 +15,5 @@ public abstract class Atributo {
         return this.nombre;
     }
 
-    //public boolean getIndicadorObligatoriedad() { return this.indicadorObligatoriedad;}
+    public boolean getIndicadorObligatoriedad() { return this.indicadorObligatoriedad;}
 }

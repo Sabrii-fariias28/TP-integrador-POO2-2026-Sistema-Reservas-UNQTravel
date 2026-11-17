@@ -28,10 +28,10 @@ class DisponibilidadTest {
 
     @Test
     void testCancelarReservasExitosamente() {
-        disp.agendarReservas(5); // Hay 5 confirmadas
+        disp.agendarReservas(5);
         assertTrue(disp.puedeCancelar(3));
         disp.cancelarReservas(3);
-        assertEquals(8, disp.cuposDisponibles()); // 10 - 2 restantes
+        assertEquals(8, disp.cuposDisponibles());
     }
 
     @Test

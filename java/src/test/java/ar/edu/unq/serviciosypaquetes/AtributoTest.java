@@ -36,8 +36,8 @@ class AtributoTest {
         AtributoBooleano opcionalNulo = new AtributoBooleano("Mascotas", false, null);
 
         assertTrue(obligatorioTrue.esValido());
-        assertTrue(obligatorioFalse.esValido()); // false es un valor válido, significa "No acepta mascotas"
-        assertFalse(obligatorioNulo.esValido()); // null es inválido si es obligatorio
+        assertTrue(obligatorioFalse.esValido());
+        assertFalse(obligatorioNulo.esValido());
         assertTrue(opcionalNulo.esValido());
     }
 
@@ -66,6 +66,8 @@ class AtributoTest {
     @Test
     void testAtributoGetters() {
         AtributoTexto atributo = new AtributoTexto("Politicas", true, "Sin reembolso");
-        assertEquals("Politicas", atributo.getNombre()); // O el getter que tengas definido
+        assertEquals("Politicas", atributo.getNombre());
+        assertTrue(atributo.getIndicadorObligatoriedad());
     }
+
 }

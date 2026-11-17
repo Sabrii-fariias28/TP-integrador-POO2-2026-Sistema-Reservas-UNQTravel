@@ -19,7 +19,6 @@ class CatalogoTest {
         listaInicial = new ArrayList<>();
         catalogo = new Catalogo(listaInicial);
 
-        // Creamos ítems reales de prueba utilizando tu constructor de ServicioIndividual
         item1 = new ServicioIndividual(
                 "01", "Hotel Llao Llao", new ArrayList<>(), "Hotel de lujo", "ProvA", "Hotel", 100.0, 0.0
         );
