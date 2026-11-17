@@ -4,6 +4,7 @@ import ar.edu.unq.serviciosypaquetes.*;
 
 import ar.edu.unq.metodoDePago.MetodoDePago;
 import ar.edu.unq.notificadores.NotificadorManager;
+import ar.edu.unq.trasladosytasas.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -158,7 +159,7 @@ class ReservaTest {
 
         reserva.agregarItem(item1);
         reserva.reembolsarTotalCostos();
-        //El precio total es de 2000 de los servicios y 5000 de las taasas = 7000
+        //El precio total es de 2000 de los servicios y 5000 de las tasas = 7000
         verify(metodoPagoMock).realizarReembolso(7000.0);
     }
 
@@ -191,6 +192,28 @@ class ReservaTest {
         reserva.cancelar();  // Luego se cancelan (incrementar cupos)
 
         verify(item1).cancelar(eq(fechaInicio), eq(fechaFin), eq(2));
+    }
+
+    @Test
+    void testCalcularCostoTrasladoSinTrasladoAsignadoEsCero() {
+        // Asumiendo que 'reserva' se instancia en @BeforeEach sin traslado
+        assertEquals(0.0, reserva.calcularCostoTraslado(), 0.001);
+    }
+
+    @Test
+    void testCalcularPrecioTotalSumaServiciosYCostoDeTraslado() {
+        ItemCatalogo itemMock = mock(ItemCatalogo.class);
+        when(itemMock.estaDisponibleEnRango(any(), any(), anyInt())).thenReturn(true);
+        when(itemMock.precioFinal()).thenReturn(10000.0);
+
+        MetodoTraslado trasladoMock = mock(MetodoTraslado.class);
+        when(trasladoMock.calcularCosto(reserva)).thenReturn(2500.0);
+
+        reserva.agregarItem(itemMock);
+        reserva.setTraslado(trasladoMock);
+
+        assertEquals(2500.0, reserva.calcularCostoTraslado(), 0.001);
+        assertEquals(12500.0, reserva.calcularPrecioTotal(), 0.001);
     }
 
 }
