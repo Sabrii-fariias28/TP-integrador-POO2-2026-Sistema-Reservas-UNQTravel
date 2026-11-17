@@ -27,7 +27,7 @@ public class ReporteMasReservado extends Reporte {
     }
 
     public List<DetalleServicioVendido> detalles(){
-        List<Reserva> reservasEnPeriodo = gestorReservas.getReservasFinalizadas().stream()
+        List<Reserva> reservasEnPeriodo = gestorReservas.reservasFinalizadas().stream()
                 .filter(r -> !r.getFechaInicio().isBefore(periodoInicio) && !r.getFechaInicio().isAfter(periodoFin))
                 .toList();
 
