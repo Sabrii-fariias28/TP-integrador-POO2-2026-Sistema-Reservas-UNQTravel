@@ -204,7 +204,6 @@ class ReservaTest {
 
         reserva.agregarItem(item1);
         reserva.reembolsarServicios();
-
         // Verifica que se reembolse únicamente el precio de los servicios (sin tasas ni traslados)
         verify(metodoPagoMock).realizarReembolso(3000.0);
     }
