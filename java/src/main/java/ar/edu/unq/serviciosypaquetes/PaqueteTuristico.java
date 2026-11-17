@@ -37,4 +37,10 @@ public class PaqueteTuristico extends ItemCatalogo {
     public boolean contieneCategoria(String categoria){
         return this.contenido.stream().anyMatch(item -> item.contieneCategoria(categoria));
     }
+
+    public List<ServicioIndividual> obtenerServiciosIndividuales() {
+        return this.contenido.stream()
+                .flatMap(item -> item.obtenerServiciosIndividuales().stream())
+                .toList();
+    }
 }
