@@ -116,4 +116,9 @@ class ItemCatalogoTest {
 
         assertFalse(resultado);
     }
+
+    @Test
+    void testGetProveedor() {
+        assertEquals("Aero", servicio.getProveedor());
+    }
 }

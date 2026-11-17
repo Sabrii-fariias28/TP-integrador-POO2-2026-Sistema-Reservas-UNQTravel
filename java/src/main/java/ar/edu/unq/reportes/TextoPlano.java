@@ -1,6 +1,6 @@
 package ar.edu.unq.reportes;
 
-public class textoPlano implements VisitorFormato{
+public class TextoPlano implements VisitorFormato{
     private String salida = "";
 
     @Override
@@ -30,9 +30,9 @@ public class textoPlano implements VisitorFormato{
     public void visitar(ReporteMasReservado r) {
         StringBuilder sb = new StringBuilder("Reporte de Servicios Más Reservados (" + r.getPeriodoInicio() + " a " + r.getPeriodoFin() + ")\n");
         for (DetalleServicioVendido d : r.getDetalles()) {
-            sb.append("- ").append(d.getNombreItem())
-                    .append(": Vendidos=").append(d.getCantidadVendida())
-                    .append(", Precio Promedio=$").append(String.format("%.2f", d.getPrecioPromedioEfectivo())).append("\n");
+            sb.append("- ").append(d.nombreItem())
+                    .append(": Vendidos=").append(d.cantidadVendida())
+                    .append(", Precio Promedio=$").append(String.format("%.2f", d.precioPromedioEfectivo())).append("\n");
         }
         this.salida = sb.toString();
     }

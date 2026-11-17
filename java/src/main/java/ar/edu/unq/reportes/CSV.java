@@ -29,10 +29,10 @@ public class CSV implements VisitorFormato{
     @Override
     public void visitar(ReporteMasReservado r) {
         StringBuilder sb = new StringBuilder("NombreItem,CantidadVendida,PrecioPromedioEfectivo\n");
-        for (DetalleServicioVendido d : r.detalles()) {
-            sb.append(d.getNombreItem()).append(",")
-                    .append(d.getCantidadVendida()).append(",")
-                    .append(d.getPrecioPromedioEfectivo()).append("\n");
+        for (DetalleServicioVendido d : r.getDetalles()) {
+            sb.append(d.nombreItem()).append(",")
+                    .append(d.cantidadVendida()).append(",")
+                    .append(d.precioPromedioEfectivo()).append("\n");
         }
         this.salida = sb.toString();
     }

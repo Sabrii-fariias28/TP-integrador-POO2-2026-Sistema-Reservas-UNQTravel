@@ -14,6 +14,14 @@ public class ReporteMasReservado extends Reporte {
     private LocalDate periodoInicio;
     private LocalDate periodoFin;
 
+    public LocalDate getPeriodoFin() {
+        return periodoFin;
+    }
+
+    public LocalDate getPeriodoInicio() {
+        return periodoInicio;
+    }
+
     public ReporteMasReservado(Catalogo catalogo, GestorReservas gestorReservas, LocalDate pInicio, LocalDate pFin) {
         super(catalogo);
         this.periodoInicio = pInicio;
@@ -26,7 +34,7 @@ public class ReporteMasReservado extends Reporte {
         v.visitar(this);
     }
 
-    public List<DetalleServicioVendido> detalles(){
+    public List<DetalleServicioVendido> getDetalles(){
         List<Reserva> reservasEnPeriodo = gestorReservas.reservasFinalizadas().stream()
                 .filter(r -> !r.getFechaInicio().isBefore(periodoInicio) && !r.getFechaInicio().isAfter(periodoFin))
                 .toList();
@@ -49,7 +57,7 @@ public class ReporteMasReservado extends Reporte {
                     .mapToDouble(Reserva::calcularPrecioTotal)
                     .sum();
 
-            double precioPromedio = reservasDelItem.isEmpty() ? 0.0 : recaudacionTotal / reservasDelItem.size();
+            double precioPromedio = recaudacionTotal / cantidadReservas;
 
             detalles.add(new DetalleServicioVendido(item.getNombre(), cantidadReservas, precioPromedio));
         }
