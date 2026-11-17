@@ -51,4 +51,9 @@ class ConfirmadaTest {
     void testRequiereNotificacionEmail_DevuelveTrue() {
         assertTrue(confirmada.requiereNotificacionEmail());
     }
+
+    @Test
+    void testConfirmarReserva_EstandoConfirmada_LanzaExcepcion() {
+        assertThrows(OperacionInvalida.class, () -> confirmada.confirmarReserva(reservaMock));
+    }
 }

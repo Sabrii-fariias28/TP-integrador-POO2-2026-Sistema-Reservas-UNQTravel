@@ -49,4 +49,9 @@ public class FinalizadaTest {
     void testRequiereVoucher_DevuelveTrue() {
         assertTrue(finalizada.requiereVoucher());
     }
+
+    @Test
+    void testEstaFinalizada_DevuelveTrue() {
+        assertTrue(finalizada.estaFinalizada());
+    }
 }

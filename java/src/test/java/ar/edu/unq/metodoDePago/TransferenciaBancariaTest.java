@@ -73,4 +73,19 @@ public class TransferenciaBancariaTest {
         verify(apiMock).reembolsarMonto(150.0);
     }
 
+    @Test
+    void testValidarDatos_FallaSiCbuEsNulo() {
+        TransferenciaBancaria transferenciaCbuNulo = new TransferenciaBancaria(null, "mi.alias", apiMock);
+
+        RuntimeException ex = assertThrows(RuntimeException.class, transferenciaCbuNulo::validarDatos);
+        assertEquals("Error: No es un CBU valido.", ex.getMessage());
+    }
+
+    @Test
+    void testValidarDatos_FallaSiAliasEsNulo() {
+        TransferenciaBancaria transferenciaAliasNulo = new TransferenciaBancaria(cbuValido, null, apiMock);
+
+        RuntimeException ex = assertThrows(RuntimeException.class, transferenciaAliasNulo::validarDatos);
+        assertEquals("Error: El alias es invalido.", ex.getMessage());
+    }
 }

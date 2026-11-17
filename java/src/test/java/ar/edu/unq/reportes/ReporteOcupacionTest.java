@@ -2,6 +2,7 @@ package ar.edu.unq.reportes;
 
 import ar.edu.unq.Catalogo;
 import ar.edu.unq.serviciosypaquetes.Disponibilidad;
+import ar.edu.unq.serviciosypaquetes.PaqueteTuristico;
 import ar.edu.unq.serviciosypaquetes.ServicioIndividual;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ class ReporteOcupacionTest {
         finPeriodo = LocalDate.of(2026, 11, 30);
 
         Disponibilidad disp1 = new Disponibilidad(LocalDate.of(2026, 11, 10), 10);
-        disp1.agendarReserva(4);
+        disp1.agendarReservas(4);
 
         Disponibilidad dispFuera = new Disponibilidad(LocalDate.of(2026, 12, 5), 20);
 
@@ -87,9 +88,9 @@ class ReporteOcupacionTest {
     void testDisponibilidadFueraDePeriodoEsIgnoradaPorElMetodoAuxiliar() {
         Catalogo catalogoPrueba = new Catalogo(new ArrayList<>());
         Disponibilidad dispAntes = new Disponibilidad(LocalDate.of(2026, 10, 15), 10);
-        dispAntes.agendarReserva(2);
+        dispAntes.agendarReservas(2);
         Disponibilidad dispDespues = new Disponibilidad(LocalDate.of(2026, 12, 10), 10);
-        dispDespues.agendarReserva(3);
+        dispDespues.agendarReservas(3);
 
         ServicioIndividual servicioPrueba = new ServicioIndividual(
                 "02", "Tour Test", List.of(dispAntes, dispDespues), "Tour", "Prov", "Tour", 50.0, 0.0
@@ -100,5 +101,36 @@ class ReporteOcupacionTest {
         List<DetalleOcupacion> detalles = reportePrueba.getDetalles();
 
         assertEquals(0, detalles.getFirst().cuposTotales());
+    }
+    @Test
+    void testGetDetallesConMultiplesCategoriasYPaquetesSeparaPorCategoria() {
+        Disponibilidad dispExcursion = new Disponibilidad(LocalDate.of(2026, 11, 15), 20);
+        dispExcursion.agendarReservas(5);
+
+        ServicioIndividual excursion = new ServicioIndividual(
+                "02", "Excursión Isla Victoria", List.of(dispExcursion), "Paseo", "ProveedorB", "Excursión", 50.0, 0.0
+        );
+
+        PaqueteTuristico paquete = new PaqueteTuristico(
+                "P1", "Pack Bariloche", new ArrayList<>(), "Combo", "UNQTravel", List.of(excursion), 10.0
+        );
+
+        catalogo.agregarItem(paquete);
+
+        List<DetalleOcupacion> detalles = reporte.getDetalles();
+
+        assertEquals(2, detalles.size());
+
+        DetalleOcupacion detalleHotel = detalles.getFirst();
+        assertEquals("Hotel", detalleHotel.categoria());
+        assertEquals(10, detalleHotel.cuposTotales());
+        assertEquals(4, detalleHotel.cuposReservados());
+        assertEquals(6, detalleHotel.cuposLibres());
+
+        DetalleOcupacion detalleExcursion = detalles.get(1);
+        assertEquals("Excursión", detalleExcursion.categoria());
+        assertEquals(20, detalleExcursion.cuposTotales());
+        assertEquals(5, detalleExcursion.cuposReservados());
+        assertEquals(15, detalleExcursion.cuposLibres());
     }
 }

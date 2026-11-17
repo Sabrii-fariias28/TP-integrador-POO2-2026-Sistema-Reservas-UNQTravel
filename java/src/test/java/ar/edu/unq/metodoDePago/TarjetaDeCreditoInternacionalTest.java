@@ -88,4 +88,19 @@ public class TarjetaDeCreditoInternacionalTest {
         tarjeta.realizarReembolso(monto);
         verify(apiMock).reembolsarMonto(monto);
     }
+    @Test
+    void testValidarDatos_FallaSiNumeroTarjetaEsNulo() {
+        TarjetaDeCreditoInternacional tarjetaNula = new TarjetaDeCreditoInternacional(apiMock, null, cvvValido, fechaValida);
+
+        RuntimeException ex = assertThrows(RuntimeException.class, tarjetaNula::validarDatos);
+        assertEquals("Error: El número de tarjeta es inválido.", ex.getMessage());
+    }
+
+    @Test
+    void testValidarDatos_FallaSiCvvEsNulo() {
+        TarjetaDeCreditoInternacional tarjetaCvvNulo = new TarjetaDeCreditoInternacional(apiMock, numValido, null, fechaValida);
+
+        RuntimeException ex = assertThrows(RuntimeException.class, tarjetaCvvNulo::validarDatos);
+        assertEquals("Error: El código CVV es inválido.", ex.getMessage());
+    }
 }

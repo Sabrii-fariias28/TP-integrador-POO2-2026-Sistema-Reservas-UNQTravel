@@ -4,8 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ar.edu.unq.serviciosypaquetes.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class PendienteTest {
@@ -51,5 +50,16 @@ public class PendienteTest {
     void testRealizarCheckIn_EstandoPendiente_LanzaExcepcion() {
         Exception excepcion = assertThrows(OperacionInvalida.class, () -> pendiente.realizarCheckIn(reservaMock));
         assertEquals("No se puede realizar el check-in", excepcion.getMessage());
+    }
+
+    @Test
+    void testOperacionesInvalidasYFlagsEnPendiente() {
+        assertThrows(OperacionInvalida.class, () -> pendiente.confirmarViaje(reservaMock));
+        assertThrows(OperacionInvalida.class, () -> pendiente.finalizarViaje(reservaMock));
+
+        assertFalse(pendiente.requiereNotificacionEmail());
+        assertFalse(pendiente.requiereVoucher());
+        assertFalse(pendiente.requiereFidelizacion());
+        assertFalse(pendiente.estaFinalizada());
     }
 }

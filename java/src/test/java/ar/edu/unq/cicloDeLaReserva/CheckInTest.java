@@ -3,6 +3,7 @@ package ar.edu.unq.cicloDeLaReserva;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import ar.edu.unq.serviciosypaquetes.ItemCatalogo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,5 +42,16 @@ public class CheckInTest {
     void testRealizarCheckIn_EstandoEnCheckIn_LanzaExcepcion() {
         Exception excepcion = assertThrows(OperacionInvalida.class, () -> checkIn.realizarCheckIn(reservaMock));
         assertEquals("No se puede realizar el check-in", excepcion.getMessage());
+    }
+
+    @Test
+    void testAgregarYQuitarItem_EstandoEnCheckIn_LanzaExcepcionHeredada() {
+        ItemCatalogo itemMock = mock(ItemCatalogo.class);
+
+        OperacionInvalida exAgregar = assertThrows(OperacionInvalida.class, () -> checkIn.agregarItem(reservaMock, itemMock));
+        assertEquals("No se pueden agregar servicios", exAgregar.getMessage());
+
+        OperacionInvalida exQuitar = assertThrows(OperacionInvalida.class, () -> checkIn.quitarItem(reservaMock, itemMock));
+        assertEquals("No se pueden quitar servicios", exQuitar.getMessage());
     }
 }

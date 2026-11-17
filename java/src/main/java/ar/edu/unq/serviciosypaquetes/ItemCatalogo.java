@@ -75,7 +75,7 @@ public abstract class ItemCatalogo {
 
         //  Si todos los días son válidos, confirmamos la reserva para el grupo de dias
         for (Disponibilidad disp : diasAApartar) {
-            disp.agendarReserva(personas);
+            disp.agendarReservas(personas);
         }
     }
 

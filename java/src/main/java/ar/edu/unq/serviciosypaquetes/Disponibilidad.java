@@ -21,7 +21,7 @@ public class Disponibilidad {
         return (this.capacidadMaxima - this.reservasConfirmadas) >= cant;
     }
 
-    public void agendarReserva(int cant){
+    public void agendarReservas(int cant){
         if (!hayLugar(cant)){
             throw new RuntimeException("No hay cupos disponibles en la fecha solicitada");
 

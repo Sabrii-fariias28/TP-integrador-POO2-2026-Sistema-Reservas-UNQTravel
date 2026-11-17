@@ -16,19 +16,19 @@ class DisponibilidadTest {
     @Test
     void testAgendarReservaExitosamente() {
         assertTrue(disp.hayLugar(5));
-        disp.agendarReserva(5);
+        disp.agendarReservas(5);
         assertEquals(5, disp.cuposDisponibles());
     }
 
     @Test
     void testAgendarReservaFallaPorFaltaDeCupo() {
-        Exception exception = assertThrows(RuntimeException.class, () -> disp.agendarReserva(11));
+        Exception exception = assertThrows(RuntimeException.class, () -> disp.agendarReservas(11));
         assertEquals("No hay cupos disponibles en la fecha solicitada", exception.getMessage());
     }
 
     @Test
     void testCancelarReservasExitosamente() {
-        disp.agendarReserva(5); // Hay 5 confirmadas
+        disp.agendarReservas(5); // Hay 5 confirmadas
         assertTrue(disp.puedeCancelar(3));
         disp.cancelarReservas(3);
         assertEquals(8, disp.cuposDisponibles()); // 10 - 2 restantes
@@ -36,14 +36,14 @@ class DisponibilidadTest {
 
     @Test
     void testCancelarReservasFallaPorFaltaDeReservasPrevias() {
-        disp.agendarReserva(2);
+        disp.agendarReservas(2);
         Exception exception = assertThrows(RuntimeException.class, () -> disp.cancelarReservas(5));
         assertEquals("No hay esa cantidad de cupos confirmados para cancelar", exception.getMessage());
     }
 
     @Test
     void testGettersDeDisponibilidad() {
-        disp.agendarReserva(4);
+        disp.agendarReservas(4);
 
         assertEquals(LocalDate.of(2026, 12, 1), disp.getFecha());
         assertEquals(10, disp.getCapacidadMaxima());
