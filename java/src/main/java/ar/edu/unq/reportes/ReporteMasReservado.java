@@ -57,7 +57,7 @@ public class ReporteMasReservado extends Reporte {
                     .mapToDouble(Reserva::calcularPrecioTotal)
                     .sum();
 
-            double precioPromedio = reservasDelItem.isEmpty() ? 0.0 : recaudacionTotal / reservasDelItem.size();
+            double precioPromedio = recaudacionTotal / cantidadReservas;
 
             detalles.add(new DetalleServicioVendido(item.getNombre(), cantidadReservas, precioPromedio));
         }

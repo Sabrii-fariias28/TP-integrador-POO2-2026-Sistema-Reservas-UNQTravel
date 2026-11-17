@@ -40,4 +40,14 @@ class DisponibilidadTest {
         Exception exception = assertThrows(RuntimeException.class, () -> disp.cancelarReservas(5));
         assertEquals("No hay esa cantidad de cupos confirmados para cancelar", exception.getMessage());
     }
+
+    @Test
+    void testGettersDeDisponibilidad() {
+        disp.agendarReserva(4);
+
+        assertEquals(LocalDate.of(2026, 12, 1), disp.getFecha());
+        assertEquals(10, disp.getCapacidadMaxima());
+        assertEquals(4, disp.getReservasConfirmadas());
+    }
+
 }

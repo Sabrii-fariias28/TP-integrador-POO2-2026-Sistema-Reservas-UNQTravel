@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -58,5 +59,22 @@ class ServicioIndividualTest {
 
         assertFalse(servicioNombreNulo.esValido());
         assertFalse(servicioNombreBlanco.esValido());
+    }
+
+    @Test
+    void testContieneNombreYCategoria() {
+        assertTrue(servicio.contieneNombre("bariloche"));
+        assertFalse(servicio.contieneNombre("Córdoba"));
+
+        assertTrue(servicio.contieneCategoria("VUELO"));
+        assertFalse(servicio.contieneCategoria("Alojamiento"));
+        assertEquals("Vuelo", servicio.getCategoria());
+    }
+
+    @Test
+    void testObtenerServiciosIndividualesDevuelveUnaListaConSiMismo() {
+        List<ServicioIndividual> lista = servicio.obtenerServiciosIndividuales();
+        assertEquals(1, lista.size());
+        assertSame(servicio, lista.getFirst());
     }
 }
