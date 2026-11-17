@@ -17,7 +17,7 @@ public class ReporteExposicion extends Reporte{
         v.visitar(this);
     }
 
-    public List<DetalleExposicion> getDetalles(){
+    public List<DetalleExposicion> detalles(){
         List<ItemCatalogo> items = this.catalogo.getItems();
         int totalItems = items.size();
         List<String> proveedores = items.stream()
