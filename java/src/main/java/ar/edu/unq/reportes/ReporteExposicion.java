@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReporteExposicion extends Reporte{
-    List<DetalleExposicion> detalles;
 
     public ReporteExposicion(Catalogo catalogo, List<DetalleExposicion> detalles){
         super(catalogo);
-        this.detalles = detalles;
     }
 
     @Override
@@ -17,7 +15,7 @@ public class ReporteExposicion extends Reporte{
         v.visitar(this);
     }
 
-    public List<DetalleExposicion> detalles(){
+    public List<DetalleExposicion> getDetalles(){
         List<ItemCatalogo> items = this.catalogo.getItems();
         int totalItems = items.size();
         List<String> proveedores = items.stream()
@@ -35,4 +33,5 @@ public class ReporteExposicion extends Reporte{
         }
         return detalles;
     }
+
 }
