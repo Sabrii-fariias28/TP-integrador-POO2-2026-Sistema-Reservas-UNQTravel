@@ -31,7 +31,7 @@ public class HTML implements VisitorFormato{
     @Override
     public void visitar(ReporteMasReservado r) {
         StringBuilder sb = new StringBuilder("<table><tr><th>Ítem</th><th>Cantidad Vendida</th><th>Precio Promedio Efectivo</th></tr>");
-        for (DetalleServicioVendido d : r.detalles()) {
+        for (DetalleServicioVendido d : r.getDetalles()) {
             sb.append("<tr><td>").append(d.nombreItem()).append("</td>")
                     .append("<td>").append(d.cantidadVendida()).append("</td>")
                     .append("<td>").append(d.precioPromedioEfectivo()).append("</td></tr>");
