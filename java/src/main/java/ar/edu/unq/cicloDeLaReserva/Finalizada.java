@@ -26,4 +26,9 @@ public class Finalizada extends EstadoReserva{
 
     @Override
     public boolean requiereVoucher(){return true;}
+
+    @Override
+    public boolean estaFinalizada(){
+        return true;
+    }
 }
