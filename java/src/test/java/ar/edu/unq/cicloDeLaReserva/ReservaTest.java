@@ -198,4 +198,20 @@ class ReservaTest {
         assertEquals(12500.0, reserva.calcularPrecioTotal(), 0.001);
     }
 
+    @Test
+    void unaReservaRealizaElReembolsoDeServicios() {
+        when(item1.precioFinal()).thenReturn(3000.0);
+
+        reserva.agregarItem(item1);
+        reserva.reembolsarServicios();
+
+        // Verifica que se reembolse únicamente el precio de los servicios (sin tasas ni traslados)
+        verify(metodoPagoMock).realizarReembolso(3000.0);
+    }
+
+    @Test
+    void unaReservaConsultaSiEstaFinalizada() {
+        assertFalse(reserva.estaFinalizada());
+    }
+
 }
