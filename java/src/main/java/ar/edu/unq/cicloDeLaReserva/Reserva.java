@@ -100,10 +100,6 @@ public class Reserva{
         return estado.estaFinalizada();
     }
 
-    public boolean estaFinalizada() {
-        return estado.estaFinalizada();
-    }
-
     //REVISAR #PREGUNTAR #LOdijoDemi
     private double tasasAdministracion(){
         return 5000;
