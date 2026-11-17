@@ -2,6 +2,8 @@ package ar.edu.unq.cicloDeLaReserva;
 import ar.edu.unq.serviciosypaquetes.*;
 import ar.edu.unq.metodoDePago.MetodoDePago;
 import ar.edu.unq.notificadores.NotificadorManager;
+import ar.edu.unq.trasladosytasas.MetodoTraslado;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,7 @@ public class Reserva{
     private LocalDate fechaFin;
     private MetodoDePago metodoDePago;
     private NotificadorManager notificadorManager;
-    //private Traslado metodoTraslado  cuando lo tengamos
+    private MetodoTraslado traslado;
 
     public Reserva(int cantPersonas,  LocalDate fechaInicio, LocalDate fechaFin, MetodoDePago metodoDePago, NotificadorManager notificador) {
         this.servicios = new ArrayList<>();
@@ -27,8 +29,7 @@ public class Reserva{
     }
 
     public void agregarItem(ItemCatalogo item){
-        //if(item.estaDisponibleEnRango(fechaInicio,fechaFin,cantPersonas)){ ESTABA MAL EL METODO
-        if(item.estaDisponible(fechaInicio,cantPersonas)){
+        if(item.estaDisponibleEnRango(fechaInicio,fechaFin,cantPersonas)){
             this.servicios.add(item);
         } else{
             throw new SinDisponibilidad("El servicio no se puede añadir, no tiene disponibilidad.");
@@ -66,7 +67,7 @@ public class Reserva{
     }
 
     public void reembolsarServicios(){
-        metodoDePago.realizarPago(calcularPrecioTotal());
+        metodoDePago.realizarReembolso(calcularPrecioServicios());
     }
     public void reembolsarCostosTasas(){
         metodoDePago.realizarReembolso(tasasAdministracion());
@@ -77,9 +78,26 @@ public class Reserva{
     }
 
     public double calcularPrecioTotal(){
+        return calcularPrecioServicios() + calcularCostoTraslado();
+    }
+
+    public double calcularPrecioServicios() {
         return servicios.stream()
-                .mapToDouble(ItemCatalogo::precioFinal)
+                .mapToDouble(ItemCatalogo::precioFinal) // Ajustar según tu firma de precioFinal
                 .sum();
+    }
+
+
+    public double calcularCostoTraslado(){
+        if (this.traslado != null) {
+            return this.traslado.calcularCosto(this);
+        } else{
+            return 0.0;
+        }
+    }
+
+    public boolean estaFinalizada() {
+        return estado.estaFinalizada();
     }
 
     public boolean estaFinalizada() {
@@ -113,6 +131,10 @@ public class Reserva{
 
     public void setMetodoDePago(MetodoDePago metodoPagoNuevo) {
         this.metodoDePago = metodoPagoNuevo;
+    }
+
+    public void setTraslado(MetodoTraslado traslado){
+        this.traslado = traslado;
     }
 
 }
