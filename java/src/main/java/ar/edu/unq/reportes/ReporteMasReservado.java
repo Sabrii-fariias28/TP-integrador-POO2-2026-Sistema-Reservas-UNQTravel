@@ -14,6 +14,14 @@ public class ReporteMasReservado extends Reporte {
     private LocalDate periodoInicio;
     private LocalDate periodoFin;
 
+    public LocalDate getPeriodoFin() {
+        return periodoFin;
+    }
+
+    public LocalDate getPeriodoInicio() {
+        return periodoInicio;
+    }
+
     public ReporteMasReservado(Catalogo catalogo, GestorReservas gestorReservas, LocalDate pInicio, LocalDate pFin) {
         super(catalogo);
         this.periodoInicio = pInicio;
