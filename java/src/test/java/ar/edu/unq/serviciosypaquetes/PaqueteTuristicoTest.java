@@ -30,7 +30,6 @@ public class PaqueteTuristicoTest {
 
         paquete = new PaqueteTuristico("P1", "Paquete Patagonia", new ArrayList<>(), "", "Travel Rock", itemsPredefinidos, 10.0);
 
-        //Para probar la recursividad, tiene el paquete anterior y otro item.
         List<ItemCatalogo> itemsConUnPaquete = List.of(itemMock3, paquete);
         paquetePrincipal =  new PaqueteTuristico("P2", "Paquete completo", new ArrayList<>(), "", "Travel Rock", itemsConUnPaquete, 20.0);
 
@@ -38,13 +37,11 @@ public class PaqueteTuristicoTest {
 
     @Test
     void testGetPrecioBaseAPaquete() {
-        // Suma: 8000
         assertEquals(8000.0, paquete.getPrecioBase());
     }
 
     @Test
     void testPrecioFinalAplicaDescuentoSobrePrecioBaseDelPaquete() {
-        // Precio base del paquete es 8000 y se le aplica el 10% de descuento 7200.
         assertEquals(7200.0, paquete.precioFinal());
     }
 
@@ -52,5 +49,32 @@ public class PaqueteTuristicoTest {
     void testPrecioFinalCalculaRecursivamentePaquetesAnidados() {
         assertEquals(9200.0, paquetePrincipal.getPrecioBase(), 0.001);
         assertEquals(7360.0, paquetePrincipal.precioFinal(), 0.001);
+    }
+
+    @Test
+    void testObtenerServiciosIndividualesConPaquetesAnidadosRecursivamente() {
+        ServicioIndividual excursion = new ServicioIndividual(
+                "03", "Excursion A", new ArrayList<>(), "Tour guiado", "ProvC", "Tour", 50.0, 0.0
+        );
+
+        PaqueteTuristico subPaquete = new PaqueteTuristico(
+                "Sub01", "Subpaquete Aventura", new ArrayList<>(), "Desc", "ProvGeneral",
+                List.of(excursion), 5.0
+        );
+
+        ServicioIndividual hotel = new ServicioIndividual(
+                "01", "Hotel Llao Llao", new ArrayList<>(), "Hotel de lujo", "ProvA", "Hotel", 100.0, 0.0
+        );
+
+        PaqueteTuristico paquetePrincipal = new PaqueteTuristico(
+                "P02", "Paquete Completo", new ArrayList<>(), "Desc", "ProvGeneral",
+                List.of(hotel, subPaquete), 15.0
+        );
+
+        List<ServicioIndividual> servicios = paquetePrincipal.obtenerServiciosIndividuales();
+
+        assertEquals(2, servicios.size());
+        assertTrue(servicios.contains(hotel));
+        assertTrue(servicios.contains(excursion));
     }
 }
