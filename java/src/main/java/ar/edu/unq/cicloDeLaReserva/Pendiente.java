@@ -16,7 +16,7 @@ public class Pendiente extends EstadoReserva{
     public void confirmarReserva(Reserva reserva) {
         reserva.realizarPago();
         reserva.cambiarEstado(new Confirmada());
-        reserva.decrementarCuposAItems();
+        reserva.reservarCuposAItems();
     }
 
     @Override

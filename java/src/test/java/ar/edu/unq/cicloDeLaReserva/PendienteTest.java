@@ -37,7 +37,7 @@ public class PendienteTest {
 
         verify(reservaMock).realizarPago();
         verify(reservaMock).cambiarEstado(any(Confirmada.class));
-        verify(reservaMock).decrementarCuposAItems();
+        verify(reservaMock).reservarCuposAItems();
     }
 
     @Test

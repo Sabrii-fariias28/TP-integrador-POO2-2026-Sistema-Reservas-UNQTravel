@@ -59,7 +59,7 @@ public class Reserva{
         servicios.forEach(item -> item.cancelar(fechaInicio, fechaFin, cantPersonas));
     }
 
-    public void decrementarCuposAItems(){
+    public void reservarCuposAItems(){
         servicios.forEach(item -> item.reservarRango(fechaInicio, fechaFin, cantPersonas));
     }
 
