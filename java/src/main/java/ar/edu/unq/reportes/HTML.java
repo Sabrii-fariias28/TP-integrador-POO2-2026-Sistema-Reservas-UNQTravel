@@ -32,9 +32,9 @@ public class HTML implements VisitorFormato{
     public void visitar(ReporteMasReservado r) {
         StringBuilder sb = new StringBuilder("<table><tr><th>Ítem</th><th>Cantidad Vendida</th><th>Precio Promedio Efectivo</th></tr>");
         for (DetalleServicioVendido d : r.detalles()) {
-            sb.append("<tr><td>").append(d.getNombreItem()).append("</td>")
-                    .append("<td>").append(d.getCantidadVendida()).append("</td>")
-                    .append("<td>").append(d.getPrecioPromedioEfectivo()).append("</td></tr>");
+            sb.append("<tr><td>").append(d.nombreItem()).append("</td>")
+                    .append("<td>").append(d.cantidadVendida()).append("</td>")
+                    .append("<td>").append(d.precioPromedioEfectivo()).append("</td></tr>");
         }
         sb.append("</table>");
         this.salida = sb.toString();
