@@ -17,6 +17,8 @@ public class GestorReservaTest {
     private MetodoDePago metodoDePago;
     private NotificadorManager notificador;
     private MetodoTraslado traslado;
+    private Reserva reserva1;
+    private Reserva reserva2;
 
     @BeforeEach
     void setUp() {
@@ -25,6 +27,20 @@ public class GestorReservaTest {
         metodoDePago = mock(MetodoDePago.class);
         notificador = mock(NotificadorManager.class);
         traslado = mock(MetodoTraslado.class);
+
+         reserva1 = gestor.crearReserva(2,
+                                         LocalDate.of(2026, 12, 1),
+                                         LocalDate.of(2026, 12, 5),
+                                         metodoDePago,
+                                         notificador,
+                                         traslado);
+
+        reserva2 = gestor.crearReserva(3,
+                                        LocalDate.of(2026, 12, 10),
+                                        LocalDate.of(2026, 12, 15),
+                                        metodoDePago,
+                                        notificador,
+                                        traslado);
     }
 
     @Test
@@ -81,5 +97,14 @@ public class GestorReservaTest {
         assertTrue(gestor.reservasFinalizadas().isEmpty());
     }
 
-    //aca falta el test del filtro funcione bien ... las resrvas finalizadas
+    @Test
+    void reservasFinalizadasDevuelveSolamenteLasReservasFinalizadas() {
+        reserva2.cambiarEstado(new Finalizada());
+
+        List<Reserva> finalizadas = gestor.reservasFinalizadas();
+
+        assertEquals(1, finalizadas.size());
+        assertSame(reserva2, finalizadas.get(0));
+        assertFalse(reserva1.estaFinalizada());
+    }
 }
