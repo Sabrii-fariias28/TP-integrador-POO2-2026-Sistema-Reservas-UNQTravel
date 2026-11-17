@@ -82,6 +82,10 @@ public class Reserva{
                 .sum();
     }
 
+    public boolean estaFinalizada() {
+        return estado.estaFinalizada();
+    }
+
     //REVISAR #PREGUNTAR #LOdijoDemi
     private double tasasAdministracion(){
         return 5000;
